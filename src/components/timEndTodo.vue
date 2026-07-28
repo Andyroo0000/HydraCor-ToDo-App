@@ -4,7 +4,7 @@ import { ref } from 'vue'
 const currentTime = new Date().toLocaleString()
 const userData = defineProps({
     todos: Array,
-    task: Object
+    task: Object,
 })
 
 function findEndTime() {

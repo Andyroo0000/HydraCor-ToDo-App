@@ -39,7 +39,7 @@ function addUserData() {
 
 <template>
     <form @submit.prevent="addTodo">
-        <div class="justify-evenly flex gap-x-* items-center">
+        <div class="justify-between flex gap-x-4 items-center">
             <input v-model="userTask" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1" placeholder="Enter a ToDo">
             <select v-model="completionStatus" placeholder="Status">
                 <option disabled value="">Select Status</option>
@@ -51,6 +51,7 @@ function addUserData() {
             
             <input v-model="userNotes" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25" placeholder="Enter Notes">
             <Button @click="addUserData">Add to List</Button>
+
         </div>
     </form>
 </template>
