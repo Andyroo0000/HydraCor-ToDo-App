@@ -2,11 +2,18 @@
 import { ref } from 'vue'
 import deleteToDo from './deleteToDo.vue'
 import Button from './buttons.vue'
+import blockedToDo from './blockedToDo.vue'
 
 const userData = defineProps({
     todos: Array,
     task: Object,
 })
+
+const currentTime = new Date().toLocaleString()
+
+const emit = defineEmits(['deleted'])
+
+const endDate = ref("TBD")
 
 const newTask = ref('')
 
@@ -17,15 +24,33 @@ const newNotes = ref('')
 const newTargetTime = ref('')
 
 function addUserData() {
-    userData.task.task = newTask.value
-    userData.task.targetTime = newTargetTime.value
-    userData.task.notes = newNotes.value
-    userData.task.completion = newCompletion.value
+    if (newTask.value) {
+        userData.task.task = newTask.value
+    }
+
+    if (newTargetTime.value) {
+        userData.task.targetTime = newTargetTime.value
+    }
+
+    if (newNotes.value) {
+        userData.task.notes = newNotes.value
+    }
+
+    if (newCompletion.value) {
+        userData.task.completion = newCompletion.value
+    }
+    if (userData.task.completion === "Blocked" || userData.task.completion === "Complete" ){
+        userData.task.isEditing = false
+        endDate.value = currentTime
+
+    }
+    else {
+        userData.task.isEditing = true
+        endDate.value = 'TBD'
+    }
 }
 
-const emit = defineEmits(['deleted'])
 
-const endDate = ref("TBD")
 </script>
 
 <template>
@@ -42,19 +67,26 @@ const endDate = ref("TBD")
                 <p>
                     <span class="font-semibold">Name:</span>
                     <p>Old: {{ userData.task.task }}</p>
-                    {{"New: "}} <input placeholder="New Task Name" v-model="newTask" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1">
+                    {{"New: "}} <input v-if="userData.task.isEditing" placeholder="New Task Name" v-model="newTask" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1">
+                    <input v-else placeholder="New Task Name" v-model="newTask" type="text" class="bg-gray-500 hover:bg-gray-700 text-white rounded w-25 px-1" disabled>
                 </p>
 
                 <p>
                     <span class="font-semibold">Completion:</span>
                     <p>Old: {{ userData.task.completion }}</p>
-                    {{"New: "}} <input placeholder="New Task Name" v-model="newCompletion" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1">
+                    {{"New: "}} <select v-model="newCompletion" placeholder="Status" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25">
+                        <option disabled value="">Select Status</option>
+                        <option value="Incomplete">Not Done</option>
+                        <option value="Complete">Done</option>
+                        <option value="Blocked">Blocked</option>
+                    </select>
                 </p>
 
                 <p>
                     <span class="font-semibold">Notes:</span>
                     <p>Old: {{ userData.task.notes }}</p>
-                    {{"New: "}} <input placeholder="New Task Name" v-model="newNotes" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1">
+                    {{"New: "}} <input v-if="userData.task.isEditing" placeholder="New Notes" v-model="newNotes" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1">
+                    <input v-else placeholder="New Task Name" v-model="newTask" type="text" class="bg-gray-500 hover:bg-gray-700 text-white rounded w-25 px-1" disabled>
                 </p>
 
                 <p>
@@ -65,7 +97,8 @@ const endDate = ref("TBD")
                 <p>
                     <span class="font-semibold">Target Date:</span>
                     <p>Old: {{ userData.task.targetTime }}</p>
-                    {{"New: "}} <input placeholder="New Task Name" v-model="newTargetTime" type="date" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1">
+                    {{"New: "}} <input v-if="userData.task.isEditing" placeholder="New Target Date" v-model="newTargetTime" type="date" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1">
+                    <input v-else placeholder="New Task Name" v-model="newTask" type="text" class="bg-gray-500 hover:bg-gray-700 text-white rounded w-25 px-1" disabled>
                 </p>
 
                 <p>
