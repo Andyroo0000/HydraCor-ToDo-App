@@ -6,7 +6,7 @@ const userTask = ref()
 
 const userData = defineProps({
     todos: Array,
-    task: Array
+    task: Object
 })
 
 function deleteUserData() {
