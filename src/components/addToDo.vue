@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import Button from './buttons.vue'
 
 const userData = defineProps({
-    todos: Array    
+    todos: Array
 })
 
 const currentTime = new Date().toLocaleString()
@@ -25,6 +25,7 @@ function addUserData() {
           endTme: currentTime,
           targetTime: targetDate,
           notes: userNotes.value,
+          isEditing: false,
 
   })
 
@@ -38,18 +39,19 @@ function addUserData() {
 
 <template>
     <form @submit.prevent="addTodo">
-        <input v-model="userTask" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded" placeholder="Enter a ToDo">
-        <select v-model="completionStatus" placeholder="Status">
-            <option disabled value="">Select Status</option>
-            <option value="Incomplete">Not Done</option>
-            <option value="Complete">Done</option>
-            <option value="blocked">Blocked</option>
-        </select>
-        <input v-model="targetDate" type="date" class="bg-blue-500 hover:bg-blue-700 text-white rounded" placeholder="Enter Notes">
-        
-        <input v-model="userNotes" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded" placeholder="Enter Notes">
-        <Button @click="addUserData">Add to List</Button>
-
+        <div class="justify-evenly flex gap-x-* items-center">
+            <input v-model="userTask" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1" placeholder="Enter a ToDo">
+            <select v-model="completionStatus" placeholder="Status">
+                <option disabled value="">Select Status</option>
+                <option value="Incomplete">Not Done</option>
+                <option value="Complete">Done</option>
+                <option value="blocked">Blocked</option>
+            </select>
+            <input v-model="targetDate" type="date" class="bg-blue-500 hover:bg-blue-700 text-white rounded" placeholder="Enter Notes">
+            
+            <input v-model="userNotes" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25" placeholder="Enter Notes">
+            <Button @click="addUserData">Add to List</Button>
+        </div>
     </form>
 </template>
 
