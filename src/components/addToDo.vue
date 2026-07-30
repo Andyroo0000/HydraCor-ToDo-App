@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import Button from './buttons.vue'
+import Button from './button.vue'
+import { addNewUserData } from '../logic/addUserData.js'
+import { deleteAllTodos } from '../logic/deleteAllToDos.js'
 
 const userData = defineProps({
     todos: Array
@@ -16,27 +18,7 @@ const completionStatus = ref('')
 
 const targetDate = ref('')
 
-function addUserData() {
-        userData.todos.push({
-          task: userTask.value,
-          completion: completionStatus.value,
-          selected: false,
-          timeCreated: currentTime,
-          endTime: currentTime,
-          targetTime: targetDate,
-          notes: userNotes.value,
-          isEditing: true,
-
-  })
-
-  userTask.value = ""
-  completionStatus.value = ""
-  userNotes.value = ""
-  targetDate.value = ""
-
-}
-
- </script>
+</script>
 
 
 <template>
@@ -52,7 +34,12 @@ function addUserData() {
             <input v-model="targetDate" type="date" class="bg-blue-500 hover:bg-blue-700 text-white rounded" placeholder="Enter Notes">
             
             <input v-model="userNotes" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25" placeholder="Enter Notes">
-            <Button @click="addUserData">Add to List</Button>
+            <!-- <Button @click="addNewUserData(userData.todos, userTask, completionStatus, currentTime, targetDate, userNotes)">Add to List</Button> -->
+
+<Button @click="() => addNewUserData(userData.todos, userTask, completionStatus, currentTime, targetDate, userNotes)">
+    Add to List
+</Button>
+<Button @click="deleteAllTodos(userData.todos)">Delete All ToDos</Button>
 
         </div>
     </form>

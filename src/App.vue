@@ -1,35 +1,21 @@
 <script setup>
-import Button from './components/buttons.vue'
-import DeleteButton from './components/deleteButton.vue';
 import { ref, reactive, watch } from 'vue'
 import PrintList from './components/listToDo.vue'
 import AddToDo from './components/addToDo.vue'
-import DeleteToDo from './components/deleteToDo.vue';
 import panel from './components/panelTodo.vue'
+import { loadToDos,  saveToDos} from './logic/saveLoadLogic.js';
 
   const userData = reactive([])
   const currentToDo = ref(null)
-  function addUserData(todo) {
-    userData.push(todo)
-  }
-function save_function() {
-  localStorage.setItem("todos", JSON.stringify(userData))
-  }
+
+  loadToDos(userData)
+
+  
   watch(
     userData,
-    save_function,
+    saveToDos,
     {deep: true}
   )
-
-function loadTodos() {
-  const savedTodos = localStorage.getItem("todos")
-
-  if (savedTodos) {
-    userData.push(...JSON.parse(savedTodos))
-  }
-}
-
-loadTodos()
 
 </script>
 
