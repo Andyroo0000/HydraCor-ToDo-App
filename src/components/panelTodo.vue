@@ -44,9 +44,9 @@ const newTargetTime = ref('')
                 <p>
                     <span class="font-semibold">Name:</span>
                     <p>Old: {{ userData.task.task }}</p>
-                    <!-- {{"New: "}} <input v-if="userData.task.isEditing" placeholder="New Task Name" v-model="newTask" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1"> -->
-                    <textBox v-model="newTask" placeholder="New Task Name" v-if="userData.task.isEditing"></textBox>
-                    <textBox v-else v-model="newTask" placeholder="New Task Name" color="gray" disabled></textBox>
+                    {{ "New: " }}
+                    <textBox v-model="newTask" placeholder="New Task Name" v-if="userData.task.isEditing" class="w-32"></textBox>
+                    <textBox v-else v-model="newTask" placeholder="New Task Name" color="gray" disabled class="w-32"></textBox>
                 </p>
 
                 <p>
@@ -60,7 +60,7 @@ const newTargetTime = ref('')
                     <span class="font-semibold">Notes:</span>
                     <p>Old: {{ userData.task.notes }}</p>
                     {{"New: "}}
-                    <Textarea v-if="userData.task.isEditing" placeholder="New Notes"></Textarea>
+                    <Textarea v-if="userData.task.isEditing" placeholder="New Notes" class=""></Textarea>
                     <Textarea v-else placeholder="New Notes" v-model="newTask" color="gray" disabled></Textarea>
                 </p>
 
@@ -87,9 +87,9 @@ const newTargetTime = ref('')
             <div class="mt-6 flex justify-center gap-4">
 
 
-                <Button @click="deleteUserData(userData.task, userData.todos)" color="red">Delete</Button>
+                <Button class="text-white" @click="deleteUserData(userData.task, userData.todos)" color="red">Delete</Button>
 
-                <Button @click="replaceUserData(newTask, userData.task, newTargetTime, newNotes, newCompletion, currentTime)">Confirm Edits</Button>
+                <Button class="text-white" @click="replaceUserData(newTask, userData.task, newTargetTime, newNotes, newCompletion, currentTime)">Confirm Edits</Button>
             </div>
 
         </div>

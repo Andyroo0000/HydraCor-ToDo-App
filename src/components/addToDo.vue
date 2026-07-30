@@ -32,9 +32,8 @@ const targetDate = ref('')
             <dropDown v-model="completionStatus"></dropDown>
             <calendar v-model="targetDate"></calendar>
             <Textarea v-model="userNotes" placeholder="Enter Notes"></Textarea>
-            <Button @click="addNewUserData(userData.todos, userTask, completionStatus, currentTime, targetDate, userNotes)">Add to List</Button>
-            <Button @click="deleteAllTodos(userData.todos)" color="red">Delete All ToDos</Button>
-
+            <Button class="text-white" @click="addNewUserData(userData.todos, userTask, completionStatus, currentTime, targetDate, userNotes)">Add to List</Button>
+            <Button class="text-white" @click="deleteAllTodos(userData.todos)" color="red">Delete All ToDos</Button>
         </div>
     </form>
 </template>
