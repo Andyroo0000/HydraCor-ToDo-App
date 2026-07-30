@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import deleteToDo from './deleteToDo.vue'
-import Button from './buttons.vue'
-import blockedToDo from './blockedToDo.vue'
+import { deleteUserData } from '../logic/deleteLogic.js'
+import { replaceUserData } from '../logic/replaceUserData.js'
+import buttons from './button.vue'
+import deleteButton from './deleteButton.vue'
 
 const userData = defineProps({
     todos: Array,
@@ -22,33 +23,6 @@ const newCompletion = ref('')
 const newNotes = ref('')
 
 const newTargetTime = ref('')
-
-function addUserData() {
-    if (newTask.value) {
-        userData.task.task = newTask.value
-    }
-
-    if (newTargetTime.value) {
-        userData.task.targetTime = newTargetTime.value
-    }
-
-    if (newNotes.value) {
-        userData.task.notes = newNotes.value
-    }
-
-    if (newCompletion.value) {
-        userData.task.completion = newCompletion.value
-    }
-    if (userData.task.completion === "Blocked" || userData.task.completion === "Complete" ){
-        userData.task.isEditing = false
-        endDate.value = currentTime
-
-    }
-    else {
-        userData.task.isEditing = true
-        endDate.value = 'TBD'
-    }
-}
 
 
 </script>
@@ -103,18 +77,17 @@ function addUserData() {
 
                 <p>
                     <span class="font-semibold">End Date:</span>
-                    {{ endDate }}
+                    {{ userData.task.endTime }}
                 </p>
 
             </div>
 
             <div class="mt-6 flex justify-center gap-4">
-                <deleteToDo
-                    :todos="userData.todos"
-                    :task="userData.task"
-                    @deleted="emit('deleted')"
-                />
-                <Button @click="addUserData">Confirm Edits</Button>
+
+
+                <deleteButton @click="deleteUserData(userData.task, userData.todos)">Delete</deleteButton>
+
+                <buttons @click="replaceUserData(newTask, userData.task, newTargetTime, newNotes, newCompletion, currentTime)">Confirm Edits</buttons>
             </div>
 
         </div>

@@ -1,16 +1,10 @@
 <script setup>
-import changeStatusToDo from './changeStatusToDo.vue';
-import deleteToDo from './deleteToDo.vue';
 import { ref } from 'vue'
-import panel from './panelToDo.vue'
 
 const userData = defineProps({
     todos: Array
 })
 const emit = defineEmits(['select'])
-
-
-
 
 </script>
 
