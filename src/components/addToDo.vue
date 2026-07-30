@@ -3,6 +3,10 @@ import { ref } from 'vue'
 import Button from './button.vue'
 import { addNewUserData } from '../logic/addUserData.js'
 import { deleteAllTodos } from '../logic/deleteAllToDos.js'
+import calendar from './calendar.vue'
+import dropDown from './dropDown.vue'
+import textBox from './textBox.vue'
+import Textarea from './textarea.vue'
 
 const userData = defineProps({
     todos: Array
@@ -22,24 +26,14 @@ const targetDate = ref('')
 
 
 <template>
-    <form @submit.prevent="addTodo">
+    <form @submit.prevent="">
         <div class="justify-between flex gap-x-4 items-center">
-            <input v-model="userTask" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1" placeholder="Enter a ToDo">
-            <select v-model="completionStatus" placeholder="Status" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25">
-                <option disabled value="">Select Status</option>
-                <option value="Incomplete">Not Done</option>
-                <option value="Complete">Done</option>
-                <option value="Blocked">Blocked</option>
-            </select>
-            <input v-model="targetDate" type="date" class="bg-blue-500 hover:bg-blue-700 text-white rounded" placeholder="Enter Notes">
-            
-            <input v-model="userNotes" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25" placeholder="Enter Notes">
-            <!-- <Button @click="addNewUserData(userData.todos, userTask, completionStatus, currentTime, targetDate, userNotes)">Add to List</Button> -->
-
-<Button @click="() => addNewUserData(userData.todos, userTask, completionStatus, currentTime, targetDate, userNotes)">
-    Add to List
-</Button>
-<Button @click="deleteAllTodos(userData.todos)">Delete All ToDos</Button>
+            <textBox v-model="userTask" placeholder="Enter ToDo" class="w-23"></textBox>
+            <dropDown v-model="completionStatus"></dropDown>
+            <calendar v-model="targetDate"></calendar>
+            <Textarea v-model="userNotes" placeholder="Enter Notes"></Textarea>
+            <Button @click="addNewUserData(userData.todos, userTask, completionStatus, currentTime, targetDate, userNotes)">Add to List</Button>
+            <Button @click="deleteAllTodos(userData.todos)" color="red">Delete All ToDos</Button>
 
         </div>
     </form>

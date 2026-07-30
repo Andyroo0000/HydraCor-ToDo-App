@@ -1,8 +1,4 @@
 export function addNewUserData(todos, userTask, completionStatus, currentTime, targetDate, userNotes) {
-    console.log(userTask.value)
-    console.log(completionStatus.value)
-    console.log(targetDate.value)
-    console.log(userNotes.value)
     
     todos.push({
             task: userTask,
@@ -15,9 +11,17 @@ export function addNewUserData(todos, userTask, completionStatus, currentTime, t
             isEditing: true,
 
     })
+  console.log(userTask)
+  console.log(completionStatus)
+  console.log(targetDate)
+  console.log(userNotes)
+  userTask = ""
+  completionStatus = ""
+  userNotes = ""
+  targetDate = ""
 
-  userTask.value = ""
-  completionStatus.value = ""
-  userNotes.value = ""
-  targetDate.value = ""
+  console.log(userTask)
+  console.log(completionStatus)
+  console.log(targetDate)
+  console.log(userNotes)
 }

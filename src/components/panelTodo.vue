@@ -2,8 +2,11 @@
 import { ref } from 'vue'
 import { deleteUserData } from '../logic/deleteLogic.js'
 import { replaceUserData } from '../logic/replaceUserData.js'
-import buttons from './button.vue'
-import deleteButton from './deleteButton.vue'
+import Button from './button.vue'
+import calendar from './calendar.vue'
+import dropDown from './dropDown.vue'
+import textBox from './textBox.vue'
+import Textarea from './textarea.vue'
 
 const userData = defineProps({
     todos: Array,
@@ -41,26 +44,24 @@ const newTargetTime = ref('')
                 <p>
                     <span class="font-semibold">Name:</span>
                     <p>Old: {{ userData.task.task }}</p>
-                    {{"New: "}} <input v-if="userData.task.isEditing" placeholder="New Task Name" v-model="newTask" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1">
-                    <input v-else placeholder="New Task Name" v-model="newTask" type="text" class="bg-gray-500 hover:bg-gray-700 text-white rounded w-25 px-1" disabled>
+                    <!-- {{"New: "}} <input v-if="userData.task.isEditing" placeholder="New Task Name" v-model="newTask" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1"> -->
+                    <textBox v-model="newTask" placeholder="New Task Name" v-if="userData.task.isEditing"></textBox>
+                    <textBox v-else v-model="newTask" placeholder="New Task Name" color="gray" disabled></textBox>
                 </p>
 
                 <p>
                     <span class="font-semibold">Completion:</span>
                     <p>Old: {{ userData.task.completion }}</p>
-                    {{"New: "}} <select v-model="newCompletion" placeholder="Status" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25">
-                        <option disabled value="">Select Status</option>
-                        <option value="Incomplete">Not Done</option>
-                        <option value="Complete">Done</option>
-                        <option value="Blocked">Blocked</option>
-                    </select>
+                    {{"New: "}}
+                    <dropDown v-model="newCompletion"></dropDown>
                 </p>
 
                 <p>
                     <span class="font-semibold">Notes:</span>
                     <p>Old: {{ userData.task.notes }}</p>
-                    {{"New: "}} <input v-if="userData.task.isEditing" placeholder="New Notes" v-model="newNotes" type="text" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1">
-                    <input v-else placeholder="New Task Name" v-model="newTask" type="text" class="bg-gray-500 hover:bg-gray-700 text-white rounded w-25 px-1" disabled>
+                    {{"New: "}}
+                    <Textarea v-if="userData.task.isEditing" placeholder="New Notes"></Textarea>
+                    <Textarea v-else placeholder="New Notes" v-model="newTask" color="gray" disabled></Textarea>
                 </p>
 
                 <p>
@@ -71,8 +72,9 @@ const newTargetTime = ref('')
                 <p>
                     <span class="font-semibold">Target Date:</span>
                     <p>Old: {{ userData.task.targetTime }}</p>
-                    {{"New: "}} <input v-if="userData.task.isEditing" placeholder="New Target Date" v-model="newTargetTime" type="date" class="bg-blue-500 hover:bg-blue-700 text-white rounded w-25 px-1">
-                    <input v-else placeholder="New Task Name" v-model="newTask" type="text" class="bg-gray-500 hover:bg-gray-700 text-white rounded w-25 px-1" disabled>
+                    {{"New: "}}
+                    <calendar v-model="newTargetTime" v-if="userData.task.isEditing" placeholder="New Target Date"></calendar>
+                    <calendar v-model="newTargetTime" v-else placeholder="New Target Date" color="gray"></calendar>
                 </p>
 
                 <p>
@@ -85,9 +87,9 @@ const newTargetTime = ref('')
             <div class="mt-6 flex justify-center gap-4">
 
 
-                <deleteButton @click="deleteUserData(userData.task, userData.todos)">Delete</deleteButton>
+                <Button @click="deleteUserData(userData.task, userData.todos)" color="red">Delete</Button>
 
-                <buttons @click="replaceUserData(newTask, userData.task, newTargetTime, newNotes, newCompletion, currentTime)">Confirm Edits</buttons>
+                <Button @click="replaceUserData(newTask, userData.task, newTargetTime, newNotes, newCompletion, currentTime)">Confirm Edits</Button>
             </div>
 
         </div>

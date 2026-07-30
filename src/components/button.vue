@@ -1,13 +1,26 @@
 <script setup>
 
+const props = defineProps({
+    color:{
+        type: String,
+        default: "blue"
+    }
+})
+
+const buttonColors = {
+    red: "bg-red-500 hover:bg-red-700",
+    blue: "bg-blue-500 hover:bg-blue-700"
+}
 
 
 </script>
 
+
+
 <template>
-    <button class="bg-blue-500 text-white rounded hover:bg-blue-700 px-4 py-1">
+
+    <button :class="[buttonColors[props.color], 'text-white rounded px-4 py-1']" >
         <slot></slot>
     </button>
-
-
+    
 </template>
