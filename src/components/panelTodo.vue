@@ -1,21 +1,22 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch} from 'vue'
 import { deleteUserData } from '../logic/deleteLogic.js'
 import { replaceUserData } from '../logic/replaceUserData.js'
-import Button from './button.vue'
-import calendar from './calendar.vue'
-import dropDown from './dropDown.vue'
-import textBox from './textBox.vue'
-import Textarea from './textarea.vue'
+import Button from './General UI/button.vue'
+import calendar from './General UI/calendar.vue'
+import dropDown from './General UI/dropDown.vue/index.js'
+import textBox from './General UI/textBox.vue/index.js'
+import Textarea from './General UI/textarea.vue/index.js'
 
 const userData = defineProps({
     todos: Array,
     task: Object,
+    panel: String,
 })
 
 const currentTime = new Date().toLocaleString()
 
-const emit = defineEmits(['deleted'])
+const emit = defineEmits(['close'])
 
 const endDate = ref("TBD")
 
@@ -87,7 +88,7 @@ const newTargetTime = ref('')
             <div class="mt-6 flex justify-center gap-4">
 
                 <Button class="text-white" @click="replaceUserData(newTask, userData.task, newTargetTime, newNotes, newCompletion, currentTime)">Confirm Edits</Button>
-            
+                <Button class="text-white" @click="emit('close')">Close</Button>
             </div>
 
         </div>
