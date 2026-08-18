@@ -86,10 +86,8 @@ const newTargetTime = ref('')
 
             <div class="mt-6 flex justify-center gap-4">
 
-
-                <Button class="text-white" @click="deleteUserData(userData.task, userData.todos)" color="red">Delete</Button>
-
                 <Button class="text-white" @click="replaceUserData(newTask, userData.task, newTargetTime, newNotes, newCompletion, currentTime)">Confirm Edits</Button>
+            
             </div>
 
         </div>
