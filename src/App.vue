@@ -1,8 +1,8 @@
 <script setup>
 import { ref, reactive, watch } from 'vue'
-import PrintList from './components/listToDo.vue'
-import AddToDo from './components/addToDo.vue'
-import editPanel from './components/panelTodo.vue'
+import PrintList from './components/todos/listToDo.vue/index.js'
+import AddToDo from './components/todos/addToDo.vue/index.js'
+import editPanel from './components/todos/panelTodo.vue/index.js'
 import { loadToDos,  saveToDos} from './logic/saveLoadLogic.js';
 import viewPanel from './components/viewToDo.vue'
 

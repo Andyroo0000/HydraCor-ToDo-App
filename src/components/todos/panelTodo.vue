@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch} from 'vue'
-import { deleteUserData } from '../logic/deleteLogic.js'
-import { replaceUserData } from '../logic/replaceUserData.js'
+import { deleteUserData } from '../../logic/deleteLogic.js'
+import { replaceUserData } from '../../logic/replaceUserData.js'
 import Button from './General UI/button.vue'
 import calendar from './General UI/calendar.vue'
 import dropDown from './General UI/dropDown.vue/index.js'

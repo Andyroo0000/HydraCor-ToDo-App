@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import Button from './General UI/button.vue'
-import { addNewUserData } from '../logic/addUserData.js'
-import { deleteAllTodos } from '../logic/deleteAllToDos.js'
+import { addNewUserData } from '../../logic/addUserData.js'
+import { deleteAllTodos } from '../../logic/deleteAllToDos.js'
 import calendar from './General UI/calendar.vue'
 import dropDown from './General UI/dropDown.vue/index.js'
 import textBox from './General UI/textBox.vue/index.js'
