@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import Button from './button.vue'
+import Button from './General UI/button.vue'
 import { deleteUserData } from '../logic/deleteLogic.js'
 
 const userData = defineProps({

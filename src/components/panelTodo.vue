@@ -2,11 +2,11 @@
 import { ref, watch} from 'vue'
 import { deleteUserData } from '../logic/deleteLogic.js'
 import { replaceUserData } from '../logic/replaceUserData.js'
-import Button from './button.vue'
-import calendar from './calendar.vue'
-import dropDown from './dropDown.vue'
-import textBox from './textBox.vue'
-import Textarea from './textarea.vue'
+import Button from './General UI/button.vue'
+import calendar from './General UI/calendar.vue'
+import dropDown from './General UI/dropDown.vue/index.js'
+import textBox from './General UI/textBox.vue/index.js'
+import Textarea from './General UI/textarea.vue/index.js'
 
 const userData = defineProps({
     todos: Array,
