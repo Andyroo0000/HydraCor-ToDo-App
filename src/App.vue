@@ -2,11 +2,14 @@
 import { ref, reactive, watch } from 'vue'
 import PrintList from './components/listToDo.vue'
 import AddToDo from './components/addToDo.vue'
-import panel from './components/panelTodo.vue'
+import editPanel from './components/panelTodo.vue'
 import { loadToDos,  saveToDos} from './logic/saveLoadLogic.js';
+import viewPanel from './components/viewToDo.vue'
 
   const userData = reactive([])
   const currentToDo = ref(null)
+
+  const panel = ref("")
 
   loadToDos(userData)
 
@@ -16,6 +19,17 @@ import { loadToDos,  saveToDos} from './logic/saveLoadLogic.js';
     saveToDos,
     {deep: true}
   )
+
+  watch(
+    userData,
+    () => {
+      if (currentToDo.value && !userData.includes(currentToDo.value)) {
+        currentToDo.value = null
+        panel.value = null
+      }
+    },
+    { deep: true }
+)
 
 </script>
 
@@ -30,9 +44,10 @@ import { loadToDos,  saveToDos} from './logic/saveLoadLogic.js';
       <!-- <div class="bg-white rounded-2xl shadow-lg w-fit mx-auto p-6"> -->
 
         <AddToDo :todos="userData" class=""></AddToDo>
-        <PrintList :todos="userData" :task="currentToDo" class="mt-4" @select="currentToDo = $event"></PrintList>
+        <PrintList :todos="userData" :task="currentToDo" class="mt-4" @select="currentToDo = $event" @panel="panel = $event"></PrintList>
       </div>
-      <panel v-if="currentToDo && currentToDo.selected" class="" :todos="userData" :task="currentToDo" @deleted="currentToDo = null" ></panel>
+      <editPanel v-if="panel === 'edit' && currentToDo" class="" :panel="panel" :todos="userData" :task="currentToDo" @close="currentToDo = null; panel = null" ></editPanel>
+      <viewPanel v-if="panel === 'view' && currentToDo" class="" :todos="userData" :task="currentToDo" @close="currentToDo = null; panel = null"></viewPanel>
     </div>
   </div>
 </template>

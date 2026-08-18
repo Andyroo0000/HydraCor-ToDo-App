@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch} from 'vue'
 import { deleteUserData } from '../logic/deleteLogic.js'
 import { replaceUserData } from '../logic/replaceUserData.js'
 import Button from './button.vue'
@@ -11,11 +11,12 @@ import Textarea from './textarea.vue'
 const userData = defineProps({
     todos: Array,
     task: Object,
+    panel: String,
 })
 
 const currentTime = new Date().toLocaleString()
 
-const emit = defineEmits(['deleted'])
+const emit = defineEmits(['close'])
 
 const endDate = ref("TBD")
 
@@ -87,7 +88,7 @@ const newTargetTime = ref('')
             <div class="mt-6 flex justify-center gap-4">
 
                 <Button class="text-white" @click="replaceUserData(newTask, userData.task, newTargetTime, newNotes, newCompletion, currentTime)">Confirm Edits</Button>
-            
+                <Button class="text-white" @click="emit('close')">Close</Button>
             </div>
 
         </div>

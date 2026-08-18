@@ -5,10 +5,11 @@ export function addNewUserData(todos, userTask, completionStatus, currentTime, t
             completion: completionStatus,
             selected: false,
             timeCreated: currentTime,
-            endTime: currentTime,
+            endTime: 'TBD',
             targetTime: targetDate,
             notes: userNotes,
             isEditing: true,
+            isViewing: false,
 
     })
   console.log(userTask)
