@@ -30,7 +30,7 @@ import { loadToDos,  saveToDos} from './logic/saveLoadLogic.js';
       <!-- <div class="bg-white rounded-2xl shadow-lg w-fit mx-auto p-6"> -->
 
         <AddToDo :todos="userData" class=""></AddToDo>
-        <PrintList :todos="userData" class="mt-4" @select="currentToDo = $event"></PrintList>
+        <PrintList :todos="userData" :task="currentToDo" class="mt-4" @select="currentToDo = $event"></PrintList>
       </div>
       <panel v-if="currentToDo && currentToDo.selected" class="" :todos="userData" :task="currentToDo" @deleted="currentToDo = null" ></panel>
     </div>
