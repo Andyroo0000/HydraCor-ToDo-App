@@ -20,10 +20,12 @@ const buttonColors = {
 
 
 <template>
-
-    <button :class="[buttonColors[props.color], 'p-1 text-center rounded']" >
+    <div class="flex flex-col gap-1">
+        <button :class="[buttonColors[props.color], 'p-1 text-center rounded']" >
         <slot></slot>
-    </button>
+        </button>
+    </div>
+    
 
     
 </template>

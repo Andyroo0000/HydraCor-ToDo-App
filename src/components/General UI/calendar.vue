@@ -16,12 +16,17 @@ const props = defineProps({
     id: {
         type: String,
         default: "",
+    },
+    disabled: {
+        type: Boolean,
+        default: false
     }
 })
 
 const dateColors = {
     blue: "bg-blue-500 hover:bg-blue-700",
-    gray: "bg-gray-500 hover:bg-gray-700"
+    gray: "bg-gray-500 hover:bg-gray-700",
+    green: "bg-green-500 hover:bg-green-700"
 }
 
 const emit = defineEmits(["update:modelValue"])
@@ -29,9 +34,12 @@ const emit = defineEmits(["update:modelValue"])
 </script>
 
 <template>
+    <div class="flex flex-col gap-1">
+        <label :for="props.id">{{ props.label }}</label>
 
-    <label :for="props.id">{{ props.label }}</label>
+        <input :value="props.modelValue" :id="props.id" :disabled="props.disabled" @input="emit('update:modelValue', $event.target.value)" type="date" :class="[dateColors[props.color], 'p-1 text-center w-29 text-white rounded']">
 
-    <input :value="props.modelValue" :id="props.id" @input="emit('update:modelValue', $event.target.value)" type="date" :class="[dateColors[props.color], 'p-1 text-center w-29 text-white rounded']">
-
+        
+    </div>
+    
 </template>

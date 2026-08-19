@@ -16,6 +16,7 @@ export function addNewUserData(
         notes: userNotes,
         isEditing: true,
         isViewing: false,
+        progressToDo: ""
     })
 
     userTask = ''
