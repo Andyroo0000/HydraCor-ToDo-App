@@ -8,6 +8,14 @@ const props = defineProps({
     modelValue: {
         type: String,
         default: ""
+    },
+    label: {
+        type: String,
+        default: "",
+    },
+    id: {
+        type: String,
+        default: "",
     }
 })
 
@@ -22,6 +30,8 @@ const emit = defineEmits(["update:modelValue"])
 
 <template>
 
-    <input :value="modelValue" @input="emit('update:modelValue', $event.target.value)" type="date" :class="[dateColors[props.color], 'text-center w-29 text-white rounded']">
+    <label :for="props.id">{{ props.label }}</label>
+
+    <input :value="props.modelValue" :id="props.id" @input="emit('update:modelValue', $event.target.value)" type="date" :class="[dateColors[props.color], 'p-1 text-center w-29 text-white rounded']">
 
 </template>

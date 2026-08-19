@@ -10,7 +10,7 @@ const props = defineProps({
 const buttonColors = {
     red: "bg-red-500 hover:bg-red-700",
     blue: "bg-blue-500 hover:bg-blue-700",
-    menu: "hover:bg-gray-100"
+    menu: "hover:bg-gray-100 "
     
 }
 
@@ -21,8 +21,9 @@ const buttonColors = {
 
 <template>
 
-    <button :class="[buttonColors[props.color], 'rounded-lg min-w-24 h-10 items-center justify-center']" >
+    <button :class="[buttonColors[props.color], 'p-1 text-center w-29 rounded']" >
         <slot></slot>
     </button>
+
     
 </template>
