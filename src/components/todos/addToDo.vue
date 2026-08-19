@@ -35,11 +35,11 @@ function addToDo() {
 
 <template>
     <form @submit.prevent="">
-        <div class="flex flex-wrap justify-between gap-4 items-center">
-            <textBox v-model="userTask" id="task" label="Task:" placeholder="Enter ToDo" class="text-white"></textBox>
+        <div class="flex flex-wrap justify-between gap-4 items-end">
+            <textBox v-model="userTask" id="task" label="Task:" placeholder="Enter ToDo" class="text-black"></textBox>
             <dropDown v-model="completionStatus" id="dropDown" label="Completion:"></dropDown>
             <calendar v-model="targetDate" id="calendar" label="Target Date:"></calendar>
-            <Textarea v-model="userNotes" id="notes" label="Notes:" class="text-white" placeholder="Enter Notes"></Textarea>
+            <Textarea v-model="userNotes" id="notes" label="Notes:" class="text-black" placeholder="Enter Notes"></Textarea>
             <Button class="text-white" @click="addToDo">Add to List</Button>
             <Button class="text-white" @click="deleteAllTodos(userData.todos)" color="red">Delete All ToDos</Button>
         </div>

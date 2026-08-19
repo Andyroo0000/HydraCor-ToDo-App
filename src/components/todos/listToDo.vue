@@ -17,12 +17,13 @@ const openMenu = ref(false)
 
 <template>
     
-    <ul>
+    <p v-if="userData.todos.length === 0" class="text-center text-gray">No Task Yet! Add One Now!</p>
+
+    <ul v-else>
         <li v-for="userAction in userData.todos" :key="userAction" class="text-black text-center">
             <div class="flex justify-center gap-2 items-center relative">
-                
                 <div class="relative bg-gray-100 rounded-lg shadow-md p-4 w-100 mb-10">
-                    <Button v-if="userData.todos.length > 0" v-model="openMenu" color="menu" class="hover:bg-gray-200 absolute top-1 right-2 text-white-700" @click="openMenu = openMenu === userAction ? null : userAction">&#8942;</Button>
+                    <Button v-if="userData.todos.length > 0" v-model="openMenu" color="menu" class="hover:bg-gray-500 absolute top-1 right-2 text-white-700" @click="openMenu = openMenu === userAction ? null : userAction">&#8942;</Button>
                     <p class="text-black">Task Name: {{ userAction.task }}</p>
                     <p class="text-black">Status: {{ userAction.completion }}</p>
                     <p class="text-black">Date Started: {{ userAction.timeCreated }}</p>

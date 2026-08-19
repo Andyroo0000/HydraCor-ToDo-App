@@ -20,12 +20,17 @@ const props = defineProps({
     placeholder: {
         type: String,
         default: "",
+    },
+    disabled: {
+        type: Boolean,
+        default: false
     }
 })
 
 const textColors = {
     blue: "bg-blue-500 hover:bg-blue-700",
-    gray: "bg-gray-500 hover:bg-gray-700"
+    gray: "bg-gray-500 hover:bg-gray-700",
+    green: "bg-green-500 hover:bg-green-700"
 }
 
 
@@ -35,9 +40,11 @@ const emit = defineEmits(["update:modelValue"])
 
 <template>
 
-    
+    <div class="flex flex-col gap-1">
     <label :for="props.id">{{ props.label }}</label>
 
-    <input :value="props.modelValue" :placeholder="props.placeholder" :id="props.id" @input="emit('update:modelValue', $event.target.value)" type="text" :class="[textColors[props.color], 'p-1 text-center w-40 text-white rounded']">
+    <input :value="props.modelValue" :disabled="props.disabled" :placeholder="props.placeholder" :id="props.id" @input="emit('update:modelValue', $event.target.value)" type="text" :class="[textColors[props.color], 'p-1 text-center w-40 text-white rounded']">
+    </div>
+
 
 </template>

@@ -47,22 +47,23 @@ const newTargetTime = ref('')
                     <p>Old: {{ userData.task.task }}</p>
                     {{ "New: " }}
                     <textBox v-model="newTask" placeholder="New Task Name" v-if="userData.task.isEditing" class="w-32"></textBox>
-                    <textBox v-else v-model="newTask" placeholder="New Task Name" color="gray" disabled class="w-32"></textBox>
+                    <textBox v-else v-model="newTask" placeholder="New Task Name" :color="userData.task.progressToDo" :disabled="true" class="w-32"></textBox>
                 </p>
 
                 <p>
                     <span class="font-semibold">Completion:</span>
                     <p>Old: {{ userData.task.completion }}</p>
                     {{"New: "}}
-                    <dropDown v-model="newCompletion"></dropDown>
+                    <dropDown v-if="userData.task.isEditing" v-model="newCompletion"></dropDown>
+                    <dropDown v-else v-model="newCompletion" :color="userData.task.progressToDo" class="w-32"></dropDown>
                 </p>
 
                 <p>
                     <span class="font-semibold">Notes:</span>
                     <p>Old: {{ userData.task.notes }}</p>
                     {{"New: "}}
-                    <Textarea v-if="userData.task.isEditing" placeholder="New Notes" class=""></Textarea>
-                    <Textarea v-else placeholder="New Notes" v-model="newTask" color="gray" disabled></Textarea>
+                    <Textarea v-if="userData.task.isEditing" placeholder="New Notes" v-model="newNotes" class=""></Textarea>
+                    <Textarea v-else placeholder="New Notes" v-model="newNotes" :color="userData.task.progressToDo" :disabled="true"></Textarea>
                 </p>
 
                 <p>
@@ -75,7 +76,7 @@ const newTargetTime = ref('')
                     <p>Old: {{ userData.task.targetTime }}</p>
                     {{"New: "}}
                     <calendar v-model="newTargetTime" v-if="userData.task.isEditing" placeholder="New Target Date"></calendar>
-                    <calendar v-model="newTargetTime" v-else placeholder="New Target Date" color="gray"></calendar>
+                    <calendar v-model="newTargetTime" v-else placeholder="New Target Date" :color="userData.task.progressToDo" :disabled="true"></calendar>
                 </p>
 
                 <p>
