@@ -26,7 +26,7 @@ const props = defineProps({
 const dropDownColors = {
     blue: "bg-blue-500 hover:bg-blue-700",
     gray: "bg-gray-500 hover:bg-gray-700",
-    green: "bg-green-500 hover:bg-green-700"
+    green: "bg-blue-500 hover:bg-blue-700"
 }
 
 
