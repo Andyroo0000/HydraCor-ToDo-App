@@ -1,10 +1,9 @@
 <script setup>
 import { ref, reactive, watch } from 'vue'
-import PrintList from './components/listToDo.vue'
-import AddToDo from './components/addToDo.vue'
-import editPanel from './components/panelTodo.vue'
+import PrintList from './components/todos/listToDo.vue'
+import AddToDo from './components/todos/addToDo.vue'
+import editPanel from './components/todos/panelTodo.vue'
 import { loadToDos,  saveToDos} from './logic/saveLoadLogic.js';
-import viewPanel from './components/viewToDo.vue'
 
   const userData = reactive([])
   const currentToDo = ref(null)
@@ -47,7 +46,6 @@ import viewPanel from './components/viewToDo.vue'
         <PrintList :todos="userData" :task="currentToDo" class="mt-4" @select="currentToDo = $event" @panel="panel = $event"></PrintList>
       </div>
       <editPanel v-if="panel === 'edit' && currentToDo" class="" :panel="panel" :todos="userData" :task="currentToDo" @close="currentToDo = null; panel = null" ></editPanel>
-      <viewPanel v-if="panel === 'view' && currentToDo" class="" :todos="userData" :task="currentToDo" @close="currentToDo = null; panel = null"></viewPanel>
     </div>
   </div>
 </template>
