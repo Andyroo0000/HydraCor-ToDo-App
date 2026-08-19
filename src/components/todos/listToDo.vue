@@ -22,7 +22,7 @@ const openMenu = ref(false)
             <div class="flex justify-center gap-2 items-center relative">
                 
                 <div class="relative bg-gray-100 rounded-lg shadow-md p-4 w-100 mb-10">
-                    <Button v-if="userData.todos.length > 0" v-model="openMenu" color="menu" class="hover:bg-gray-200 absolute top-2 right-2 w-1 text-white-700" @click="openMenu = openMenu === userAction ? null : userAction">&#8942;</Button>
+                    <Button v-if="userData.todos.length > 0" v-model="openMenu" color="menu" class="hover:bg-gray-200 absolute top-1 right-2 text-white-700" @click="openMenu = openMenu === userAction ? null : userAction">&#8942;</Button>
                     <p class="text-black">Task Name: {{ userAction.task }}</p>
                     <p class="text-black">Status: {{ userAction.completion }}</p>
                     <p class="text-black">Date Started: {{ userAction.timeCreated }}</p>
@@ -31,8 +31,8 @@ const openMenu = ref(false)
 
                 </div>
                     <div v-if="openMenu === userAction" class="absolute top-8 right-0 w-32 bg-white border rounded-lg shadow-lg overflow-hidden -translate-x-8 z-50">
-                        <Button color="menu" class="text-black" v-model="userAction.selected" @click="panel = 'edit'; openMenu = ''; userAction.selected = !userAction.selected; emit('select', userAction); emit('panel', 'edit')">Edit</Button>
-                        <Button @click="deleteUserData(userAction, userData.todos)" class="text-white" color="red">Delete</Button>
+                        <Button color="blue" class="text-white w-25" v-model="userAction.selected" @click="panel = 'edit'; openMenu = ''; userAction.selected = !userAction.selected; emit('select', userAction); emit('panel', 'edit')">Edit</Button>
+                        <Button @click="deleteUserData(userAction, userData.todos)" class="text-white w-25" color="red">Delete</Button>
                     </div>
             </div>
         </li>
