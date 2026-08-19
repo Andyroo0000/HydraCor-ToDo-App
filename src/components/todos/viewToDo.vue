@@ -1,5 +1,5 @@
 <script setup>
-import Button from './General UI/button.vue'
+import Button from '../General UI/button.vue'
 const userData = defineProps({
     todos: Array,
     task: Object,
