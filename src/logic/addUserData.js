@@ -18,8 +18,8 @@ export function addNewUserData(
         isViewing: false,
     })
 
-    userTask.value = ''
-    completionStatus.value = ''
-    targetDate.value = ''
-    userNotes.value = ''
+    userTask = ''
+    completionStatus = ''
+    targetDate = ''
+    userNotes = ''
 }

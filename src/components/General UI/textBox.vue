@@ -8,6 +8,18 @@ const props = defineProps({
     modelValue: {
         type: String,
         default: ""
+    },
+    label: {
+        type: String,
+        default: "",
+    },
+    id: {
+        type: String,
+        default: "",
+    },
+    placeholder: {
+        type: String,
+        default: "",
     }
 })
 
@@ -23,6 +35,9 @@ const emit = defineEmits(["update:modelValue"])
 
 <template>
 
-    <input :value="modelValue" @input="emit('update:modelValue', $event.target.value)" type="text" :class="[textColors[props.color], 'text-center text-white rounded']">
+    
+    <label :for="props.id">{{ props.label }}</label>
+
+    <input :value="props.modelValue" :placeholder="props.placeholder" :id="props.id" @input="emit('update:modelValue', $event.target.value)" type="text" :class="[textColors[props.color], 'p-1 text-center w-40 text-white rounded']">
 
 </template>
