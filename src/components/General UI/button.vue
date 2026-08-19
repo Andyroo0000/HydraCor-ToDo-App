@@ -21,7 +21,7 @@ const buttonColors = {
 
 <template>
 
-    <button :class="[buttonColors[props.color], 'p-1 text-center w-29 rounded']" >
+    <button :class="[buttonColors[props.color], 'p-1 text-center rounded']" >
         <slot></slot>
     </button>
 
