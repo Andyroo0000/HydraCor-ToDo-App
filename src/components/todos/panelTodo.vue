@@ -28,6 +28,21 @@ const newNotes = ref('')
 
 const newTargetTime = ref('')
 
+const dropDownOptionsStatus = [
+    {
+        value: "Incomplete",
+        label: "Not Done"
+    },
+    {
+        value: "Complete",
+        label: "Done"
+    },
+    {
+        value: "Blocked",
+        label: "Blocked"
+    }
+]
+
 
 </script>
 
@@ -54,8 +69,9 @@ const newTargetTime = ref('')
                     <span class="font-semibold">Completion:</span>
                     <p>Old: {{ userData.task.completion }}</p>
                     {{"New: "}}
-                    <dropDown v-if="userData.task.isEditing" v-model="newCompletion"></dropDown>
-                    <dropDown v-else v-model="newCompletion" :color="userData.task.progressToDo" class="w-32"></dropDown>
+                    <dropDown v-if="userData.task.isEditing" v-model="newCompletion" id="dropDownStatus" label="Completion:" placeholder="Select One" :options="dropDownOptionsStatus"></dropDown>
+                    <dropDown v-else v-model="newCompletion" id="dropDownStatus" label="Completion:" placeholder="Select One" :options="dropDownOptionsStatus"></dropDown>
+
                 </p>
 
                 <p>
