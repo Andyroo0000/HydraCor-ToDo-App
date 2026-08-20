@@ -5,6 +5,7 @@ import { deleteUserData } from '../../logic/deleteLogic.js'
 import DropDown from '../General UI/dropDown.vue'
 import { filterToDos } from '../../logic/filterToDos.js'
 import { findBorderColor } from '../../logic/borderColor.js'
+import { dueDateCalculator } from '../../logic/dueDateLogic.js'
 
 const userData = defineProps({
     todos: Array,
@@ -73,6 +74,9 @@ const filteredDropDownOptions = [
         <div class="flex justify-center gap-10 items-start relative flex-wrap">   
             <li v-for="userAction in filteredToDoList" :key="userAction" class="text-black text-center">
                     <div class="relative bg-gray-100 rounded-lg shadow-md p-4 w-100 mb-10 border-2" :class="findBorderColor(userAction)">
+                        <span v-if="dueDateCalculator(userAction).showPill" :class="dueDateCalculator(userAction).color" class="absolute top-1 left-2 text-xs px-2 py-0.5 rounded-full mt-1 text-white">
+                        {{ dueDateCalculator(userAction).placeholder }}
+                        </span>
                         <Button v-if="userData.todos.length > 0" v-model="openMenu" color="menu" class="hover:bg-gray-500 absolute top-1 right-2 text-white-700 w-10" @click="openMenu = openMenu === userAction ? null : userAction">&#8942;</Button>
                             <div v-if="openMenu === userAction" class="absolute top-8 -right-32 w-32 bg-white border rounded-lg shadow-lg z-50 flex flex-col items-center gap-1 p-2">
                             <Button color="blue" class="text-white w-25" v-model="userAction.selected" @click="panel = 'edit'; openMenu = ''; userAction.selected = !userAction.selected; emit('select', userAction); emit('panel', 'edit')">Edit</Button>

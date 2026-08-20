@@ -6,6 +6,10 @@ export function addNewUserData(
     targetDate,
     userNotes
 ) {
+    const checkEditing = true
+    if (completionStatus === "Complete" || completionStatus === "Blocked") {
+        checkEditing = false
+    }
     todos.push({
         task: userTask,
         completion: completionStatus,
@@ -14,7 +18,7 @@ export function addNewUserData(
         endTime: 'TBD',
         targetTime: targetDate,
         notes: userNotes,
-        isEditing: true,
+        isEditing: checkEditing,
         isViewing: false,
         progressToDo: "",
         all: "all"

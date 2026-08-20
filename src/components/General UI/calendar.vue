@@ -20,6 +20,10 @@ const props = defineProps({
     disabled: {
         type: Boolean,
         default: false
+    },
+    required: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -37,7 +41,7 @@ const emit = defineEmits(["update:modelValue"])
     <div class="flex flex-col gap-1">
         <label :for="props.id">{{ props.label }}</label>
 
-        <input :value="props.modelValue" :id="props.id" :disabled="props.disabled" @input="emit('update:modelValue', $event.target.value)" type="date" :class="[dateColors[props.color], 'p-1 text-center w-29 text-white rounded']">
+        <input :value="props.modelValue" :required="props.required" :id="props.id" :disabled="props.disabled" @input="emit('update:modelValue', $event.target.value)" type="date" :class="[dateColors[props.color], 'p-1 text-center w-29 text-white rounded']">
 
         
     </div>
