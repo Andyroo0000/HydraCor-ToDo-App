@@ -49,64 +49,52 @@ const dropDownOptionsStatus = [
 <template>
     <div class="bg-gray-200 min-h-screen flex justify-center items-start pt-10 px-4">
 
-        <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md mr-4">
+        <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-xl mr-4">
 
             <h1 class="text-2xl font-bold text-blue-600 mb-6 text-center">
                 Edit Page
             </h1>
 
-            <div class="space-y-3 text-gray-700">
+            <form @submit.prevent="replaceUserData(newTask, userData.task, newTargetTime, newNotes, newCompletion, currentTime)">
+                <div class="space-y-3 text-gray-700">
+    
+                    <p>
+                        <span class="font-semibold">New Name:</span>
+                        <textBox v-model="newTask" required placeholder="New Task Name" v-if="userData.task.isEditing" class="w-32"></textBox>
+                        <textBox v-else v-model="newTask" placeholder="New Task Name" :color="userData.task.progressToDo" :disabled="true" class="w-32"></textBox>
+                    </p>
 
-                <p>
-                    <span class="font-semibold">Name:</span>
-                    <p>Old: {{ userData.task.task }}</p>
-                    {{ "New: " }}
-                    <textBox v-model="newTask" placeholder="New Task Name" v-if="userData.task.isEditing" class="w-32"></textBox>
-                    <textBox v-else v-model="newTask" placeholder="New Task Name" :color="userData.task.progressToDo" :disabled="true" class="w-32"></textBox>
-                </p>
+                    <p>
+                        <span class="font-semibold">New Completion:</span>
+                        <dropDown v-if="userData.task.isEditing" required v-model="newCompletion" id="dropDownStatus" placeholder="Select One" :options="dropDownOptionsStatus"></dropDown>
+                        <dropDown v-else v-model="newCompletion" id="dropDownStatus" placeholder="Select One" :options="dropDownOptionsStatus"></dropDown>
 
-                <p>
-                    <span class="font-semibold">Completion:</span>
-                    <p>Old: {{ userData.task.completion }}</p>
-                    {{"New: "}}
-                    <dropDown v-if="userData.task.isEditing" v-model="newCompletion" id="dropDownStatus" label="Completion:" placeholder="Select One" :options="dropDownOptionsStatus"></dropDown>
-                    <dropDown v-else v-model="newCompletion" id="dropDownStatus" label="Completion:" placeholder="Select One" :options="dropDownOptionsStatus"></dropDown>
+                    </p>
 
-                </p>
 
-                <p>
-                    <span class="font-semibold">Notes:</span>
-                    <p>Old: {{ userData.task.notes }}</p>
-                    {{"New: "}}
-                    <Textarea v-if="userData.task.isEditing" placeholder="New Notes" v-model="newNotes" class=""></Textarea>
-                    <Textarea v-else placeholder="New Notes" v-model="newNotes" :color="userData.task.progressToDo" :disabled="true"></Textarea>
-                </p>
+                    <p>
+                        <span class="font-semibold">New Target Date:</span>
+                        <calendar v-model="newTargetTime" v-if="userData.task.isEditing" placeholder="New Target Date"></calendar>
+                        <calendar v-model="newTargetTime" v-else placeholder="New Target Date" :color="userData.task.progressToDo" :disabled="true"></calendar>
+                    </p>
 
-                <p>
-                    <span class="font-semibold">Date Created:</span>
-                    {{ userData.task.timeCreated }}
-                </p>
 
-                <p>
-                    <span class="font-semibold">Target Date:</span>
-                    <p>Old: {{ userData.task.targetTime }}</p>
-                    {{"New: "}}
-                    <calendar v-model="newTargetTime" v-if="userData.task.isEditing" placeholder="New Target Date"></calendar>
-                    <calendar v-model="newTargetTime" v-else placeholder="New Target Date" :color="userData.task.progressToDo" :disabled="true"></calendar>
-                </p>
+                    <p>
+                        <span class="font-semibold">New Notes:</span>
+                        <Textarea v-if="userData.task.isEditing" placeholder="New Notes" v-model="newNotes" class=""></Textarea>
+                        <Textarea v-else placeholder="New Notes" v-model="newNotes" :color="userData.task.progressToDo" :disabled="true"></Textarea>
+                    </p>
 
-                <p>
-                    <span class="font-semibold">End Date:</span>
-                    {{ userData.task.endTime }}
-                </p>
+                </div>
 
-            </div>
+                <div class="mt-6 flex justify-center gap-4">
 
-            <div class="mt-6 flex justify-center gap-4">
+                    <Button class="text-white" type="submit">Confirm Edits</Button>
+                    <Button class="text-white" color="red" @click="emit('close')">Cancel</Button>
+                </div>
+                
+            </form>
 
-                <Button class="text-white" @click="replaceUserData(newTask, userData.task, newTargetTime, newNotes, newCompletion, currentTime)">Confirm Edits</Button>
-                <Button class="text-white" @click="emit('close')">Close</Button>
-            </div>
 
         </div>
 
