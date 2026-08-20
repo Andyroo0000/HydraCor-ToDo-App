@@ -47,7 +47,6 @@ const dropDownOptionsStatus = [
 </script>
 
 <template>
-    <div class="bg-gray-200 min-h-screen flex justify-center items-start pt-10 px-4">
 
         <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-xl mr-4">
 
@@ -59,7 +58,7 @@ const dropDownOptionsStatus = [
                 <div class="space-y-3 text-gray-700">
     
                     <p>
-                        <span class="font-semibold">New Name:</span>
+                        <span class="font-semibold text-black-500">New Name:</span>
                         <textBox v-model="newTask" required placeholder="New Task Name" v-if="userData.task.isEditing" class="w-32"></textBox>
                         <textBox v-else v-model="newTask" placeholder="New Task Name" :color="userData.task.progressToDo" :disabled="true" class="w-32"></textBox>
                     </p>
@@ -98,5 +97,4 @@ const dropDownOptionsStatus = [
 
         </div>
 
-    </div>
 </template>

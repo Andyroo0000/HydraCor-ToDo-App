@@ -8,6 +8,7 @@ import dropDown from '../General UI/dropDown.vue'
 import textBox from '../General UI/textBox.vue'
 import Textarea from '../General UI/textarea.vue'
 
+
 const userData = defineProps({
     todos: Array
 })
@@ -53,12 +54,12 @@ function addToDo() {
         <div class="flex flex-wrap justify-between items-end">
             <textBox v-model="userTask" id="task" required label="Task:" placeholder="Enter ToDo" class="text-black"></textBox>
             <dropDown v-model="completionStatus" id="dropDownStatus" required label="Completion:" placeholder="Select One" :options="dropDownOptionsStatus"></dropDown>
-            <calendar v-model="targetDate" id="calendar" label="Target Date:"></calendar>
+            <calendar v-model="targetDate" required id="calendar" label="Target Date:"></calendar>
             <Button class="text-white" type="submit">Add to List</Button>
             <Button class="text-white" @click="deleteAllTodos(userData.todos)" color="red">Delete All ToDos</Button>
         </div>
         <div>
-            <Textarea v-model="userNotes" id="notes" label="Notes:" class="text-black mt-5 w-full" placeholder="Enter Notes"></Textarea>
+            <Textarea v-model="userNotes" id="notes" label="Notes:" class="text-black mt-5 w-full" placeholder="Enter Notes" @submit-enter="addToDo"></Textarea>
 
         </div>
     </form>
