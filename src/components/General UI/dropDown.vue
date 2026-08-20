@@ -20,6 +20,14 @@ const props = defineProps({
     disabled: {
         type: Boolean,
         default: false
+    },
+    placeholder: {
+        type: String,
+        default: ""
+    },
+    options: {
+        type: Array,
+        default: () => []
     }
 })
 
@@ -43,10 +51,12 @@ const emit = defineEmits(["update:modelValue"])
         <label :for="props.id">{{ props.label }}</label>
 
         <select :value="props.modelValue" :disabled="props.disabled" :id="props.id" @change="emit('update:modelValue', $event.target.value)" :class="[dropDownColors[props.color], 'p-1 text-center w-29 text-white rounded']">
-                        <option disabled value="">Select Status</option>
-                        <option value="Incomplete">Not Done</option>
+                        <option disabled value="">{{ props.placeholder }}</option>
+                        <option v-for="options in props.options" :key="options.value" :value="options.value">{{ options.label }}</option>
+                        
+                        <!-- <option value="Incomplete">Not Done</option>
                         <option value="Complete">Done</option>
-                        <option value="Blocked">Blocked</option>
+                        <option value="Blocked">Blocked</option> -->
         </select>
     </div>
 

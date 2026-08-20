@@ -22,6 +22,21 @@ const completionStatus = ref('')
 
 const targetDate = ref('')
 
+const dropDownOptionsStatus = [
+    {
+        value: "Incomplete",
+        label: "Not Done"
+    },
+    {
+        value: "Complete",
+        label: "Done"
+    },
+    {
+        value: "Blocked",
+        label: "Blocked"
+    }
+]
+
 function addToDo() {
     addNewUserData(userData.todos, userTask.value, completionStatus.value, currentTime, targetDate.value, userNotes.value)  
     userTask.value = ''
@@ -37,7 +52,7 @@ function addToDo() {
     <form @submit.prevent="">
         <div class="flex flex-wrap justify-between gap-4 items-end">
             <textBox v-model="userTask" id="task" label="Task:" placeholder="Enter ToDo" class="text-black"></textBox>
-            <dropDown v-model="completionStatus" id="dropDown" label="Completion:"></dropDown>
+            <dropDown v-model="completionStatus" id="dropDown" label="Completion:" placeholder="Select One" :options="dropDownOptionsStatus"></dropDown>
             <calendar v-model="targetDate" id="calendar" label="Target Date:"></calendar>
             <Textarea v-model="userNotes" id="notes" label="Notes:" class="text-black" placeholder="Enter Notes"></Textarea>
             <Button class="text-white" @click="addToDo">Add to List</Button>

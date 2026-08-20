@@ -17,6 +17,13 @@ const totalCount = computed(() => userData.todos.length)
 const amountCompleted = computed(() => userData.todos.filter(todo => todo.completion === "Complete").length)
 
 const percentageCompleted = computed(() => (amountCompleted.value/totalCount.value) * 100)
+
+const filteredToDosName = ref()
+
+const filteredToDoList = f
+
+
+
 </script>
 
 <template>
@@ -25,7 +32,8 @@ const percentageCompleted = computed(() => (amountCompleted.value/totalCount.val
 
     <ul v-else>
         <div v-if="userData.todos.length > 0" class="text-center mb-4">
-            <p>{{ amountCompleted }} / {{ totalCount }} ({{ percentageCompleted }}%)</p>
+            <p>{{ "Completed" }}</p>
+            <p>{{ amountCompleted }} / {{ totalCount }} ({{ Math.round(percentageCompleted) }}%)</p>
             <div class="w-full bg-gray-200 rounded-full h-3">
                 <div class="bg-blue-500 h-3 rounded-full" :style="{ width: percentageCompleted + '%' }"></div>
             </div>
@@ -39,7 +47,6 @@ const percentageCompleted = computed(() => (amountCompleted.value/totalCount.val
                     <p class="text-black">Date Started: {{ userAction.timeCreated }}</p>
                     <p class="text-black">Date Due: {{ userAction.targetTime }}</p>
                     <p class="text-black">Date Ended: {{ userAction.endTime }}</p>
-                    <p>{{ amountCompleted }} / {{ totalCount }} ({{ percentageCompleted }}%)</p>
                 </div>
                     <div v-if="openMenu === userAction" class="absolute top-8 right-0 w-32 bg-white border rounded-lg shadow-lg overflow-hidden -translate-x-8 z-50 flex flex-col items-center gap-1 p-2">
                         <Button color="blue" class="text-white w-25" v-model="userAction.selected" @click="panel = 'edit'; openMenu = ''; userAction.selected = !userAction.selected; emit('select', userAction); emit('panel', 'edit')">Edit</Button>
