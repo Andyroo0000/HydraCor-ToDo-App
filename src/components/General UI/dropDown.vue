@@ -29,6 +29,10 @@ const props = defineProps({
     options: {
         type: Array,
         default: () => []
+    },
+    required: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -63,7 +67,7 @@ const selectedValue = computed({
 
         <label :for="props.id">{{ props.label }}</label>
 
-        <select :disabled="props.disabled" :id="props.id" v-model="selectedValue" :class="[dropDownColors[props.color], 'p-1 text-center w-29 text-white rounded']">
+        <select :disabled="props.disabled" :required="props.required" :id="props.id" v-model="selectedValue" :class="[dropDownColors[props.color], 'p-1 text-center w-29 text-white rounded']">
                         <option disabled value="">{{ props.placeholder }}</option>
                         <option v-for="options in props.options" :key="options.value" :value="options.value">{{ options.label }}</option>
                         

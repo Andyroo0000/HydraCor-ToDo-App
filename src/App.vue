@@ -39,7 +39,7 @@ import { loadToDos,  saveToDos} from './logic/saveLoadLogic.js';
     <h1 class="text-blue-600 text-4xl font-bold mb-7 justify-center flex pt-5">Andrew's ToDo App</h1>
 
     <div class="flex gap-6 justify-center items-start px-6">
-      <div class="w-fit bg-white rounded-2xl shadow-lg max-w-3xl p-6">
+      <div class="w-full bg-white rounded-2xl shadow-lg max-w-6xl p-6">
       <!-- <div class="bg-white rounded-2xl shadow-lg w-fit mx-auto p-6"> -->
 
         <AddToDo :todos="userData" class=""></AddToDo>

@@ -43,7 +43,7 @@ const emit = defineEmits(["update:modelValue"])
     <div class="flex flex-col gap-1">
     <label :for="props.id">{{ props.label }}</label>
 
-    <textarea rows="1" :id="props.id" :disabled="props.disabled" :placeholder="props.placeholder" :value="modelValue" @input="emit('update:modelValue', $event.target.value)" type="text" :class="[textareaColors[props.color], 'p-1 text-center w-40 text-white rounded']"></textarea>
+    <textarea rows="1" :id="props.id" :disabled="props.disabled" :placeholder="props.placeholder" :value="modelValue" @input="emit('update:modelValue', $event.target.value)" type="text" :class="[textareaColors[props.color], 'p-1 text-center text-white rounded min-h-15']"></textarea>
         
     </div>
    
