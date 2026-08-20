@@ -2,6 +2,8 @@
 import { ref, computed} from 'vue'
 import Button from '../General UI/button.vue'
 import { deleteUserData } from '../../logic/deleteLogic.js'
+import DropDown from '../General UI/dropDown.vue'
+import { filterToDos } from '../../logic/filterToDos.js'
 
 const userData = defineProps({
     todos: Array,
@@ -18,10 +20,35 @@ const amountCompleted = computed(() => userData.todos.filter(todo => todo.comple
 
 const percentageCompleted = computed(() => (amountCompleted.value/totalCount.value) * 100)
 
-const filteredToDosName = ref()
+const filteredToDosName = ref({
+    value: "all",
+    attribute: "all"
+    },)
 
-const filteredToDoList = f
+const filteredToDoList = filterToDos(filteredToDosName, userData.todos)
 
+const filteredDropDownOptions = [
+    {
+        value: {value: "all", 
+                attribute: "all"},
+        label: "All"
+    },
+        {
+        value: {value: "Incomplete", 
+                attribute: "completion"},
+        label: "Not Done"
+    },
+    {
+        value: {value: "Blocked", 
+                attribute: "completion"},
+        label: "Blocked"
+    },
+        {
+        value: {value: "Complete", 
+                attribute: "completion"},
+        label: "Done"
+    },
+]
 
 
 </script>
@@ -31,14 +58,18 @@ const filteredToDoList = f
     <p v-if="userData.todos.length === 0" class="text-center text-gray">No Task Yet! Add One Now!</p>
 
     <ul v-else>
-        <div v-if="userData.todos.length > 0" class="text-center mb-4">
-            <p>{{ "Completed" }}</p>
-            <p>{{ amountCompleted }} / {{ totalCount }} ({{ Math.round(percentageCompleted) }}%)</p>
-            <div class="w-full bg-gray-200 rounded-full h-3">
-                <div class="bg-blue-500 h-3 rounded-full" :style="{ width: percentageCompleted + '%' }"></div>
+        <div v-if="userData.todos.length > 0" class="mb-4">
+            <DropDown class="left-2" v-model="filteredToDosName" id="dropDownFilter" label="Filter" placeholder="Select One" :options="filteredDropDownOptions"></DropDown>
+
+            <div class="text-center">
+                <p>Completed</p>
+                <p>{{ amountCompleted }} / {{ totalCount }} ({{ Math.round(percentageCompleted) }}%)</p>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div class="bg-blue-500 h-3 rounded-full" :style="{ width: percentageCompleted + '%' }"></div>
+                </div>    
             </div>
         </div>
-        <li v-for="userAction in userData.todos" :key="userAction" class="text-black text-center">
+        <li v-for="userAction in filteredToDoList" :key="userAction" class="text-black text-center">
             <div class="flex justify-center gap-2 items-center relative">   
                 <div class="relative bg-gray-100 rounded-lg shadow-md p-4 w-100 mb-10">
                     <Button v-if="userData.todos.length > 0" v-model="openMenu" color="menu" class="hover:bg-gray-500 absolute top-1 right-2 text-white-700" @click="openMenu = openMenu === userAction ? null : userAction">&#8942;</Button>
