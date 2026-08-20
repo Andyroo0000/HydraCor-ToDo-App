@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from 'vue'
 
 const props = defineProps({
     color:{
@@ -6,7 +7,7 @@ const props = defineProps({
         default: "blue"
     },
     modelValue: {
-        type: String,
+        type: [Object, String],
         default: ""
     },
     label: {
@@ -37,8 +38,20 @@ const dropDownColors = {
     green: "bg-blue-500 hover:bg-blue-700"
 }
 
-
 const emit = defineEmits(["update:modelValue"])
+
+
+const selectedValue = computed({
+    get() {
+        return props.modelValue
+    },
+
+    set(value) {
+        emit('update:modelValue', value)
+    }
+})
+
+
 
 
 </script>
@@ -50,7 +63,7 @@ const emit = defineEmits(["update:modelValue"])
 
         <label :for="props.id">{{ props.label }}</label>
 
-        <select :value="props.modelValue" :disabled="props.disabled" :id="props.id" @change="emit('update:modelValue', $event.target.value)" :class="[dropDownColors[props.color], 'p-1 text-center w-29 text-white rounded']">
+        <select :disabled="props.disabled" :id="props.id" v-model="selectedValue" :class="[dropDownColors[props.color], 'p-1 text-center w-29 text-white rounded']">
                         <option disabled value="">{{ props.placeholder }}</option>
                         <option v-for="options in props.options" :key="options.value" :value="options.value">{{ options.label }}</option>
                         
