@@ -6,7 +6,7 @@ export function addNewUserData(
     targetDate,
     userNotes
 ) {
-    const checkEditing = true
+    let checkEditing = true
     if (completionStatus === "Complete" || completionStatus === "Blocked") {
         checkEditing = false
     }
