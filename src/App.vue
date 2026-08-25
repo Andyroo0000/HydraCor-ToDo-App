@@ -8,22 +8,20 @@ import Button from './components/common/button.vue';
 
 const userData = reactive([]);
 const currentToDo = ref(null);
-
 const panel = ref('');
 
 loadToDos(userData);
-
 watch(userData, saveToDos, { deep: true });
 
 watch(
-	userData,
-	() => {
-		if (currentToDo.value && !userData.includes(currentToDo.value)) {
-			currentToDo.value = null;
-			panel.value = null;
-		}
-	},
-	{ deep: true },
+  userData,
+  () => {
+    if (currentToDo.value && !userData.includes(currentToDo.value)) {
+      currentToDo.value = null;
+      panel.value = null;
+    }
+  },
+  { deep: true },
 );
 </script>
 
