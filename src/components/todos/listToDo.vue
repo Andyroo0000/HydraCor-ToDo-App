@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, toRef } from 'vue';
 import Button from '../common/button.vue';
 import { deleteUserData } from '../../logic/deleteLogic.js';
 import DropDown from '../common/dropDown.vue';
@@ -13,6 +13,7 @@ const userData = defineProps({
 	todos: Array,
 	task: Object,
 	panel: String,
+    filterName: Object,
 });
 const emit = defineEmits(['select']);
 
@@ -28,31 +29,9 @@ const percentageCompleted = computed(
 	() => (amountCompleted.value / totalCount.value) * 100,
 );
 
-const filteredToDosName = ref({
-	value: 'all',
-	attribute: 'all',
-});
 
-const filteredToDoList = filterToDos(filteredToDosName, userData.todos);
+const filteredToDoList = filterToDos(toRef(props, 'filterName'), userData.todos);
 
-const filteredDropDownOptions = [
-	{
-		value: { value: 'all', attribute: 'all' },
-		label: 'All',
-	},
-	{
-		value: { value: 'Incomplete', attribute: 'completion' },
-		label: 'Not Done',
-	},
-	{
-		value: { value: 'Blocked', attribute: 'completion' },
-		label: 'Blocked',
-	},
-	{
-		value: { value: 'Complete', attribute: 'completion' },
-		label: 'Done',
-	},
-];
 const search = ref('');
 const searchedList = computed(() => {
 	return searchFunction(filteredToDoList.value, search.value);
