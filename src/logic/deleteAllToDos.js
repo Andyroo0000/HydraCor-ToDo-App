@@ -1,3 +1,3 @@
 export function deleteAllTodos(todos) {
-    todos.splice(0)
+  todos.splice(0);
 }
