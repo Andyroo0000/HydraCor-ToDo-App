@@ -52,8 +52,8 @@ watch(
         :todos="userData"
         :task="currentToDo"
         @close="
-          currentToDo = null;
-          panel = null;
+          currentToDo = null
+          panel = null
         "
       ></editPanel>
     </div>

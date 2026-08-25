@@ -59,31 +59,35 @@ const searchedList = computed(() => {
 })
 
 function resetValue() {
-    search = ""
+  search.value = ''
 }
 
 watch(
-    () => userData.todos.length,
-    (length) => {
-        if (length === 0) {
-            resetValue()
-        }
+  () => userData.todos.length,
+  (length) => {
+    if (length === 0) {
+      resetValue()
     }
+  },
 )
 </script>
 
 <template>
-    <div v-if="userData.todos.length === 0" class="text-center text-gray mt-10">
-        <p>
-            No Task Yet! Add One Now!
-        </p>
-    </div>
+  <div v-if="userData.todos.length === 0" class="text-center text-gray mt-10">
+    <p>No Task Yet! Add One Now!</p>
+  </div>
 
   <ul v-else>
     <div v-if="userData.todos.length > 0" class="mb-4">
-    
-        <TextBox color="blue" v-model="search" id="searchBar" label="Search" placeholder="Enter ToDo" class=""></TextBox>
-        
+      <TextBox
+        color="blue"
+        v-model="search"
+        id="searchBar"
+        label="Search"
+        placeholder="Enter ToDo"
+        class=""
+      ></TextBox>
+
       <DropDown
         class="left-2 mt-2"
         v-model="filteredToDosName"
@@ -114,7 +118,7 @@ watch(
         :key="userAction"
         class="text-black text-center"
       >
-      <div
+        <div
           class="relative bg-gray-100 rounded-lg shadow-md p-4 w-100 mb-10 border-2"
           :class="findBorderColor(userAction)"
         >
@@ -142,8 +146,8 @@ watch(
               class="text-white w-25"
               v-model="userAction.selected"
               @click="
-                panel = 'edit';
-                openMenu = '';
+                panel = 'edit'
+                openMenu = ''
                 userAction.selected = !userAction.selected
                 emit('select', userAction)
                 emit('panel', 'edit')
