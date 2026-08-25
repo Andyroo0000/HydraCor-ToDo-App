@@ -2,15 +2,15 @@
 const props = defineProps({
   color: {
     type: String,
-    default: "blue",
+    default: 'blue',
   },
-});
+})
 
 const buttonColors = {
-  red: "bg-red-500 hover:bg-red-700",
-  blue: "bg-blue-500 hover:bg-blue-700",
-  menu: "hover:bg-gray-100 ",
-};
+  red: 'bg-red-500 hover:bg-red-700',
+  blue: 'bg-blue-500 hover:bg-blue-700',
+  menu: 'hover:bg-gray-100 ',
+}
 </script>
 
 <template>

@@ -1,67 +1,91 @@
 <script setup>
-import { ref, computed } from "vue";
-import Button from "../common/button.vue";
-import { deleteUserData } from "../../logic/deleteLogic.js";
-import DropDown from "../common/dropDown.vue";
-import { filterToDos } from "../../logic/filterToDos.js";
-import { findBorderColor } from "../../logic/borderColor.js";
-import { dueDateCalculator } from "../../logic/dueDateLogic.js";
+import { ref, computed, watch } from 'vue'
+import Button from '../common/button.vue'
+import { deleteUserData } from '../../logic/deleteLogic.js'
+import DropDown from '../common/dropDown.vue'
+import { filterToDos } from '../../logic/filterToDos.js'
+import { findBorderColor } from '../../logic/borderColor.js'
+import { dueDateCalculator } from '../../logic/dueDateLogic.js'
+import TextBox from '../common/textBox.vue'
+import { searchFunction } from '../../logic/searchToDo.js'
 
 const userData = defineProps({
   todos: Array,
   task: Object,
   panel: String,
-});
-const emit = defineEmits(["select"]);
+})
+const emit = defineEmits(['select'])
 
-const openMenu = ref(false);
+const openMenu = ref(false)
 
-const totalCount = computed(() => userData.todos.length);
+const totalCount = computed(() => userData.todos.length)
 
 const amountCompleted = computed(
-  () => userData.todos.filter((todo) => todo.completion === "Complete").length,
-);
+  () => userData.todos.filter((todo) => todo.completion === 'Complete').length,
+)
 
 const percentageCompleted = computed(
   () => (amountCompleted.value / totalCount.value) * 100,
-);
+)
 
 const filteredToDosName = ref({
-  value: "all",
-  attribute: "all",
-});
+  value: 'all',
+  attribute: 'all',
+})
 
-const filteredToDoList = filterToDos(filteredToDosName, userData.todos);
+const filteredToDoList = filterToDos(filteredToDosName, userData.todos)
 
 const filteredDropDownOptions = [
   {
-    value: { value: "all", attribute: "all" },
-    label: "All",
+    value: { value: 'all', attribute: 'all' },
+    label: 'All',
   },
   {
-    value: { value: "Incomplete", attribute: "completion" },
-    label: "Not Done",
+    value: { value: 'Incomplete', attribute: 'completion' },
+    label: 'Not Done',
   },
   {
-    value: { value: "Blocked", attribute: "completion" },
-    label: "Blocked",
+    value: { value: 'Blocked', attribute: 'completion' },
+    label: 'Blocked',
   },
   {
-    value: { value: "Complete", attribute: "completion" },
-    label: "Done",
+    value: { value: 'Complete', attribute: 'completion' },
+    label: 'Done',
   },
-];
+]
+const search = ref('')
+const searchedList = computed(() => {
+  return searchFunction(filteredToDoList.value, search.value)
+})
+
+function resetValue() {
+    search = ""
+}
+
+watch(
+    () => userData.todos.length,
+    (length) => {
+        if (length === 0) {
+            resetValue()
+        }
+    }
+)
 </script>
 
 <template>
-  <p v-if="userData.todos.length === 0" class="text-center text-gray mt-10">
-    No Task Yet! Add One Now!
-  </p>
+    <div v-if="userData.todos.length === 0" class="text-center text-gray mt-10">
+        <p>
+            No Task Yet! Add One Now!
+        </p>
+    </div>
 
   <ul v-else>
     <div v-if="userData.todos.length > 0" class="mb-4">
+    
+        <TextBox color="blue" v-model="search" id="searchBar" label="Search" placeholder="Enter ToDo" class=""></TextBox>
+        
       <DropDown
-        class="left-2"
+        class="left-2 mt-2"
         v-model="filteredToDosName"
         id="dropDownFilter"
         label="Filter"
@@ -86,11 +110,11 @@ const filteredDropDownOptions = [
     </div>
     <div class="flex justify-center gap-10 items-start relative flex-wrap">
       <li
-        v-for="userAction in filteredToDoList"
+        v-for="userAction in searchedList"
         :key="userAction"
         class="text-black text-center"
       >
-        <div
+      <div
           class="relative bg-gray-100 rounded-lg shadow-md p-4 w-100 mb-10 border-2"
           :class="findBorderColor(userAction)"
         >
@@ -120,9 +144,9 @@ const filteredDropDownOptions = [
               @click="
                 panel = 'edit';
                 openMenu = '';
-                userAction.selected = !userAction.selected;
-                emit('select', userAction);
-                emit('panel', 'edit');
+                userAction.selected = !userAction.selected
+                emit('select', userAction)
+                emit('panel', 'edit')
               "
               >Edit</Button
             >
