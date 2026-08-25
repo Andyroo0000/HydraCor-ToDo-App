@@ -138,7 +138,7 @@ watch(
 						>&#8942;</Button
 					>
 					<div
-						v-if="openMenu === userAction"
+					    v-if="openMenu === userAction"
 						class="absolute top-8 -right-32 w-32 bg-white border rounded-lg shadow-lg z-50 flex flex-col items-center gap-1 p-2"
 					>
 						<Button
