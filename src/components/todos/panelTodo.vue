@@ -1,47 +1,47 @@
 <script setup>
-import { ref, watch } from "vue";
-import { deleteUserData } from "../../logic/deleteLogic.js";
-import { replaceUserData } from "../../logic/replaceUserData.js";
-import Button from "../common/button.vue";
-import calendar from "../common/calendar.vue";
-import dropDown from "../common/dropDown.vue";
-import textBox from "../common/textBox.vue";
-import Textarea from "../common/textarea.vue";
+import { ref, watch } from 'vue'
+import { deleteUserData } from '../../logic/deleteLogic.js'
+import { replaceUserData } from '../../logic/replaceUserData.js'
+import Button from '../common/button.vue'
+import calendar from '../common/calendar.vue'
+import dropDown from '../common/dropDown.vue'
+import textBox from '../common/textBox.vue'
+import Textarea from '../common/textarea.vue'
 
 const userData = defineProps({
   todos: Array,
   task: Object,
   panel: String,
-});
+})
 
-const currentTime = new Date().toLocaleString();
+const currentTime = new Date().toLocaleString()
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(['close'])
 
-const endDate = ref("TBD");
+const endDate = ref('TBD')
 
-const newTask = ref("");
+const newTask = ref('')
 
-const newCompletion = ref("");
+const newCompletion = ref('')
 
-const newNotes = ref("");
+const newNotes = ref('')
 
-const newTargetTime = ref("");
+const newTargetTime = ref('')
 
 const dropDownOptionsStatus = [
   {
-    value: "Incomplete",
-    label: "Not Done",
+    value: 'Incomplete',
+    label: 'Not Done',
   },
   {
-    value: "Complete",
-    label: "Done",
+    value: 'Complete',
+    label: 'Done',
   },
   {
-    value: "Blocked",
-    label: "Blocked",
+    value: 'Blocked',
+    label: 'Blocked',
   },
-];
+]
 </script>
 
 <template>

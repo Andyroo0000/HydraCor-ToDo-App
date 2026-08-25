@@ -1,22 +1,22 @@
 <script setup>
-import { computed } from "vue";
+import { computed } from 'vue'
 
 const props = defineProps({
   color: {
     type: String,
-    default: "blue",
+    default: 'blue',
   },
   modelValue: {
     type: [Object, String],
-    default: "",
+    default: '',
   },
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   id: {
     type: String,
-    default: "",
+    default: '',
   },
   disabled: {
     type: Boolean,
@@ -24,7 +24,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: "",
+    default: '',
   },
   options: {
     type: Array,
@@ -34,25 +34,25 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
+})
 
 const dropDownColors = {
-  blue: "bg-blue-500 hover:bg-blue-700",
-  gray: "bg-gray-500 hover:bg-gray-700",
-  green: "bg-blue-500 hover:bg-blue-700",
-};
+  blue: 'bg-blue-500 hover:bg-blue-700',
+  gray: 'bg-gray-500 hover:bg-gray-700',
+  green: 'bg-blue-500 hover:bg-blue-700',
+}
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue'])
 
 const selectedValue = computed({
   get() {
-    return props.modelValue;
+    return props.modelValue
   },
 
   set(value) {
-    emit("update:modelValue", value);
+    emit('update:modelValue', value)
   },
-});
+})
 </script>
 
 <template>

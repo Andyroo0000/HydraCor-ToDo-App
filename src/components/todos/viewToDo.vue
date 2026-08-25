@@ -1,11 +1,11 @@
 <script setup>
-import Button from "../common/button.vue";
+import Button from '../common/button.vue'
 const userData = defineProps({
   todos: Array,
   task: Object,
-});
+})
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(['close'])
 </script>
 
 <template>

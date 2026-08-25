@@ -1,41 +1,41 @@
 <script setup>
-import { ref } from "vue";
-import Button from "../common/button.vue";
-import { addNewUserData } from "../../logic/addUserData.js";
-import { deleteAllTodos } from "../../logic/deleteAllToDos.js";
-import calendar from "../common/calendar.vue";
-import dropDown from "../common/dropDown.vue";
-import textBox from "../common/textBox.vue";
-import Textarea from "../common/textarea.vue";
+import { ref } from 'vue'
+import Button from '../common/button.vue'
+import { addNewUserData } from '../../logic/addUserData.js'
+import { deleteAllTodos } from '../../logic/deleteAllToDos.js'
+import calendar from '../common/calendar.vue'
+import dropDown from '../common/dropDown.vue'
+import textBox from '../common/textBox.vue'
+import Textarea from '../common/textarea.vue'
 
 const userData = defineProps({
   todos: Array,
-});
+})
 
-const currentTime = new Date().toLocaleString();
+const currentTime = new Date().toLocaleString()
 
-const userTask = ref("");
+const userTask = ref('')
 
-const userNotes = ref("");
+const userNotes = ref('')
 
-const completionStatus = ref("");
+const completionStatus = ref('')
 
-const targetDate = ref("");
+const targetDate = ref('')
 
 const dropDownOptionsStatus = [
   {
-    value: "Incomplete",
-    label: "Not Done",
+    value: 'Incomplete',
+    label: 'Not Done',
   },
   {
-    value: "Complete",
-    label: "Done",
+    value: 'Complete',
+    label: 'Done',
   },
   {
-    value: "Blocked",
-    label: "Blocked",
+    value: 'Blocked',
+    label: 'Blocked',
   },
-];
+]
 
 function addToDo() {
   addNewUserData(
@@ -45,11 +45,11 @@ function addToDo() {
     currentTime,
     targetDate.value,
     userNotes.value,
-  );
-  userTask.value = "";
-  completionStatus.value = "";
-  targetDate.value = "";
-  userNotes.value = "";
+  )
+  userTask.value = ''
+  completionStatus.value = ''
+  targetDate.value = ''
+  userNotes.value = ''
 }
 </script>
 

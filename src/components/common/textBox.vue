@@ -2,23 +2,23 @@
 const props = defineProps({
   color: {
     type: String,
-    default: "blue",
+    default: 'blue',
   },
   modelValue: {
     type: String,
-    default: "",
+    default: '',
   },
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   id: {
     type: String,
-    default: "",
+    default: '',
   },
   placeholder: {
     type: String,
-    default: "",
+    default: '',
   },
   disabled: {
     type: Boolean,
@@ -28,15 +28,15 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
+})
 
 const textColors = {
-  blue: "bg-blue-500 hover:bg-blue-700",
-  gray: "bg-gray-500 hover:bg-gray-700",
-  green: "bg-blue-300 hover:bg-blue-500",
-};
+  blue: 'bg-blue-500 hover:bg-blue-700',
+  gray: 'bg-gray-500 hover:bg-gray-700',
+  green: 'bg-blue-300 hover:bg-blue-500',
+}
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue'])
 </script>
 
 <template>
