@@ -4,21 +4,26 @@ const props = defineProps({
 		type: String,
 		default: 'blue',
 	},
+	type: {
+		type: String,
+		default: 'button',
+	},
 });
 
 const buttonColors = {
-	red: 'bg-red-500 hover:bg-red-700',
-	blue: 'bg-blue-500 hover:bg-blue-700',
-	menu: 'hover:bg-gray-100 ',
+	red: 'text-red-500 border border-red-500 hover:bg-red-700 hover:text-white placeholder:text-red-700',
+	blue: 'text-blue-500 border border-blue-500 hover:bg-blue-700 hover:text-white placeholder:text-blue-700',
+	menu: 'hover:bg-gray-100',
 };
 </script>
 
 <template>
 	<div class="flex flex-col gap-1">
 		<button
+			:type="props.type"
 			:class="[
 				buttonColors[props.color],
-				'p-1 text-center rounded transition-all duration-200 hover:scale-105 hover:shadow-md',
+				'p-2 text-center rounded-full transition-all duration-200 hover:scale-105 hover:shadow-md',
 			]"
 		>
 			<slot></slot>
