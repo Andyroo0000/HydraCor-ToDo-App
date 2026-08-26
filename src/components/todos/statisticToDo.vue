@@ -31,7 +31,7 @@ const progress = computed(() => (percentage.value / 100) * circumference);
 </script>
 
 <template>
-	<div class="bg-white rounded-2xl shadow-lg p-6 w-72">
+	<div class="bg-white rounded-2xl shadow-lg p-6 w-85">
 		<div class="flex items-center justify-between mb-4">
 			<p class="font-bold text-lg">Statistics</p>
 			<p class="text-sm text-gray-600">{{ total }} tasks</p>
@@ -74,102 +74,3 @@ const progress = computed(() => (percentage.value / 100) * circumference);
 		</div>
 	</div>
 </template>
-
-<!-- <script setup>
-
-import { Doughnut } from 'vue-chartjs'
-import { computed } from 'vue'
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, DoughnutController, CategoryScale } from 'chart.js'
-
-ChartJS.register(Title, Tooltip, Legend, ArcElement, DoughnutController, CategoryScale)
-
-
-const userData = defineProps({
-    todos: Array
-});
-
-
-const amountCompleted = computed(
-	() => userData.todos.filter((todo) => todo.completion === 'Complete').length,
-);
-
-const amountBlocked = computed(
-	() => userData.todos.filter((todo) => todo.completion === 'Blocked').length,
-);
-const amountIncomplete = computed(
-	() => userData.todos.filter((todo) => todo.completion === 'Incomplete' || !todo.completion).length,
-);
-
-
-const chartData = computed(() => ({
-    labels: ['Completed', 'Blocked', 'Incomplete'],
-    datasets: [
-        {
-            label: 'To-Do Statistics',
-            data: [amountCompleted.value, amountBlocked.value, amountIncomplete.value],
-            backgroundColor: ['#4ade80', '#f87171', '#3B82F6'],
-            borderColor: '#ffffff',
-            borderWidth: 2,
-            hoverOffset: 8,
-        },
-    ],
-}))
-
-const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutout: '65%',
-    plugins: {
-        legend: {
-            position: 'bottom',
-            labels: {
-                usePointStyle: true,
-                boxWidth: 8,
-                padding: 16,
-                font: { size: 12 },
-                generateLabels: (chart) => {
-                    const data = chart.data
-                    const total = data.datasets[0].data.reduce((a, b) => a + b, 0)
-                    return data.labels.map((label, i) => {
-                        const value = data.datasets[0].data[i]
-                        const pct = total === 0 ? 0 : Math.round((value / total) * 100)
-                        const meta = chart.getDatasetMeta(0)
-                        const isHidden = meta.data[i]?.hidden ?? false
-                        return {
-                            text: `${label}: ${value} (${pct}%)`,
-                            fillStyle: data.datasets[0].backgroundColor[i],
-                            strokeStyle: data.datasets[0].backgroundColor[i],
-                            hidden: isHidden,
-                            index: i,
-                        }
-                    })
-                },
-            },
-        },
-        title: {
-            display: true,
-            text: 'To-Do Statistics',
-            font: { size: 14, weight: 'bold' },
-            padding: { bottom: 12 },
-        },
-        tooltip: {
-            callbacks: {
-                label: (ctx) => {
-                    const total = ctx.dataset.data.reduce((a, b) => a + b, 0)
-                    const value = ctx.parsed
-                    const pct = total === 0 ? 0 : Math.round((value / total) * 100)
-                    return ` ${ctx.label}: ${value}/${total} (${pct}%)`
-                },
-            },  
-},
-    },
-}
-</script>
-
-<template>
-	<div class="bg-white rounded-2xl shadow-lg p-6 w-72">
-        <Doughnut :data="chartData" :options="chartOptions" />
-    </div>
-
-
-</template> -->

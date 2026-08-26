@@ -21,18 +21,10 @@ const openMenu = ref(false);
 
 const totalCount = computed(() => userData.todos.length);
 
-const amountCompleted = computed(
-	() => userData.todos.filter((todo) => todo.completion === 'Complete').length,
-);
-
-const percentageCompleted = computed(
-	() => (amountCompleted.value / totalCount.value) * 100,
-);
-
-
 const filteredToDoList = filterToDos(toRef(userData, 'filterName'), userData.todos);
 
 const search = ref('');
+
 const searchedList = computed(() => {
 	return searchFunction(filteredToDoList.value, search.value);
 });
@@ -63,7 +55,7 @@ watch(
         </div>
 
         <div v-else>
-            <div v-if="userData.todos.length > 0" class="mb-4">
+            <div v-if="userData.todos.length > 0" class="mb-8">
                 <TextBox
                     color="blue"
                     v-model="search"
@@ -72,21 +64,6 @@ watch(
                     placeholder="Enter ToDo"
                     class=""
                 ></TextBox>
-
-                <div class="text-center">
-                    <p>Completed</p>
-                    <p>
-                        {{ amountCompleted }} / {{ totalCount }} ({{
-                            Math.round(percentageCompleted)
-                        }}%)
-                    </p>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div
-                            class="bg-blue-500 h-3 rounded-full transition-all duration-500"
-                            :style="{ width: percentageCompleted + '%' }"
-                        ></div>
-                    </div>
-                </div>
             </div>
             <div class="grid grid-cols-2 gap-4 min-h-80">
                 <div
