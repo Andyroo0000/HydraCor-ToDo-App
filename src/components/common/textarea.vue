@@ -29,7 +29,8 @@ const props = defineProps({
 const textareaColors = {
 	blue: 'bg-white border border-blue-500 text-blue-700 hover:bg-blue-700 hover:text-white focus:ring-2 focus:ring-blue-300 focus:outline-none hover:placeholder:text-white placeholder:text-blue-500',
 	gray: 'bg-white border border-gray-500 hover:text-white focus:ring-2 focus:ring-gray-300 focus:outline-none text-gray-700 hover:bg-gray-700',
-	green: 'bg-white border border-blue-500 hover:text-white focus:ring-2 focus:ring-blue-300 focus:outline-none text-blue-700 hover:bg-blue-700',
+	green:
+		'bg-white border border-blue-500 hover:text-white focus:ring-2 focus:ring-blue-300 focus:outline-none text-blue-700 hover:bg-blue-700',
 };
 
 const emit = defineEmits(['update:modelValue']);

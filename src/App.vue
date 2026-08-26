@@ -7,6 +7,75 @@ import { loadToDos, saveToDos } from './logic/saveLoadLogic.js';
 import Button from './components/common/button.vue';
 import FilterMenu from './components/todos/filterMenu.vue';
 import StatisticToDo from './components/todos/statisticToDo.vue';
+import { supabase } from './logic/supabaseClient.js';
+import accountToDo from './components/todos/accountToDo.vue';
+
+const currentUser = ref(null);
+
+async function testConnection() {
+	const { data, error } = await supabase
+		.from('todos')
+		.select('*')
+		.eq('user_id', currentUser.value.id);
+
+	console.log('data:', data);
+	console.log('error:', error);
+}
+
+async function testInsert() {
+	const { data, error } = await supabase
+		.from('todos')
+		.insert([
+			{
+				task: 'Test task from Vue',
+				completion: 'Incomplete',
+				user_id: currentUser.value.id,
+			},
+		])
+		.select();
+
+	console.log('insert data:', data);
+	console.log('insert error:', error);
+}
+
+async function testSignUp() {
+	const { data, error } = await supabase.auth.signUp({
+		email: 'andrew-leung@comcast.net',
+		password: 'testpassword123',
+	});
+
+	console.log('signup data:', data);
+	console.log('signup error:', error);
+}
+
+async function testLogin() {
+	const { data, error } = await supabase.auth.signInWithPassword({
+		email: 'andrew-leung@comcast.net', // same email you signed up with
+		password: 'testpassword123',
+	});
+
+	console.log('login data:', data);
+	console.log('login error:', error);
+}
+supabase.auth.onAuthStateChange((event, session) => {
+	currentUser.value = session?.user ?? null;
+});
+
+async function testSecurityBreak() {
+	const { data, error } = await supabase
+		.from('todos')
+		.insert([
+			{
+				task: 'This should fail',
+				completion: 'Incomplete',
+				user_id: '00000000-0000-0000-0000-000000000000', // fake/wrong ID
+			},
+		])
+		.select();
+
+	console.log('security test data:', data);
+	console.log('security test error:', error);
+}
 
 const userData = reactive([]);
 const currentToDo = ref(null);
@@ -15,76 +84,96 @@ const panel = ref('');
 loadToDos(userData);
 watch(userData, saveToDos, { deep: true });
 
-const filteredToDosName = ref({ value: 'all', attribute: 'all' })
+const filteredToDosName = ref({ value: 'all', attribute: 'all' });
 
 const filteredDropDownOptions = [
-    { value: { value: 'all', attribute: 'all' }, label: 'All' },
-    { value: { value: 'Incomplete', attribute: 'completion' }, label: 'Not Done' },
-    { value: { value: 'Blocked', attribute: 'completion' }, label: 'Blocked' },
-    { value: { value: 'Complete', attribute: 'completion' }, label: 'Done' },
-]
+	{ value: { value: 'all', attribute: 'all' }, label: 'All' },
+	{
+		value: { value: 'Incomplete', attribute: 'completion' },
+		label: 'Not Done',
+	},
+	{ value: { value: 'Blocked', attribute: 'completion' }, label: 'Blocked' },
+	{ value: { value: 'Complete', attribute: 'completion' }, label: 'Done' },
+];
 
 watch(
-  userData,
-  () => {
-    if (currentToDo.value && !userData.includes(currentToDo.value)) {
-      currentToDo.value = null;
-      panel.value = null;
-    }
-  },
-  { deep: true },
+	userData,
+	() => {
+		if (currentToDo.value && !userData.includes(currentToDo.value)) {
+			currentToDo.value = null;
+			panel.value = null;
+		}
+	},
+	{ deep: true },
 );
+
+const showSignInPanel = ref(false);
+const showLogInPanel = ref(false);
 </script>
 
 <template>
-  <div class="bg-white w-full h-18 border-black border-b flex items-center justify-between px-6">
-    <div class="flex items-center gap-2 ml-20">
-        <div class="bg-blue-500 w-10 h-10 rounded flex items-center justify-center">
-            <p class="text-white text-center font-bold">AT</p>
-        </div>
-        <div>
-            <p class="text-lg font-bold color-black">AndrewDoIt</p>
-            <p class="text-sm text-gray-750">Stop procrastinating. Andrew do it.</p>
-        </div>
-    </div>
+	<div
+		class="bg-white w-full h-18 border-black border-b flex items-center justify-between px-6"
+	>
+		<div class="flex items-center gap-2 ml-20">
+			<div
+				class="bg-blue-500 w-10 h-10 rounded flex items-center justify-center"
+			>
+				<p class="text-white text-center font-bold">AT</p>
+			</div>
+			<div>
+				<p class="text-lg font-bold color-black">AndrewDoIt</p>
+				<p class="text-sm text-gray-750">Stop procrastinating. Andrew do it.</p>
+			</div>
+		</div>
 
-    <div class="hidden md:flex items-center gap-7 mr-20">
-        <p>Home</p>
-        <p>My Tasks</p>
-        <p>About</p>
-        <Button color="blue" class="text-white">Sign in</Button>
-    </div>
-  </div>
-  <div class="bg-gray-100 min-h-screen">
-
+		<div class="hidden md:flex items-center gap-7 mr-20">
+			<p>Home</p>
+			<p>My Tasks</p>
+			<p>About</p>
+			<Button color="blue" class="" @click="showSignInPanel = true"
+				>Sign in</Button
+			>
+			<Button color="blue" class="">Log in</Button>
+		</div>
+	</div>
+	<div class="bg-gray-100 min-h-screen">
 		<div class="flex gap-6 justify-start items-start px-6 max-w-6xl mx-auto">
-    <div class="flex flex-col gap-4 mt-4 ml-8">
-        <AddToDo :todos="userData"></AddToDo>
-        <FilterMenu v-model="filteredToDosName" :options="filteredDropDownOptions"></FilterMenu>
-        <StatisticToDo :todos="userData" class="" />
+			<div class="flex flex-col gap-4 mt-4 ml-8">
+				<AddToDo :todos="userData"></AddToDo>
+				<FilterMenu
+					v-model="filteredToDosName"
+					:options="filteredDropDownOptions"
+				></FilterMenu>
+				<StatisticToDo :todos="userData" class="" />
+			</div>
 
-    </div>
-
-    <PrintList
-        :todos="userData"
-        :task="currentToDo"
-        :filterName="filteredToDosName"
-        class="mt-4"
-        @select="currentToDo = $event"
-        @panel="panel = $event"
-    ></PrintList>
-			<!-- </div> -->
-			<editPanel
-				v-if="panel === 'edit' && currentToDo"
-				class="mt-4"
-				:panel="panel"
+			<PrintList
 				:todos="userData"
 				:task="currentToDo"
-				@close="
-					currentToDo = null;
-					panel = null;
-				"
-			></editPanel>
+				:filterName="filteredToDosName"
+				class="mt-4"
+				@select="currentToDo = $event"
+				@panel="panel = $event"
+			></PrintList>
+			<!-- </div> -->
 		</div>
+
+		<accountToDo
+			v-if="showSignInPanel"
+			class=""
+			@close="showSignInPanel = null"
+		></accountToDo>
+		<editPanel
+			v-if="panel === 'edit' && currentToDo"
+			class="mt-4"
+			:panel="panel"
+			:todos="userData"
+			:task="currentToDo"
+			@close="
+				currentToDo = null;
+				panel = null;
+			"
+		></editPanel>
 	</div>
 </template>

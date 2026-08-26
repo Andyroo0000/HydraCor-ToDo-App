@@ -45,98 +45,104 @@ const dropDownOptionsStatus = [
 </script>
 
 <template>
-	<div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-xl mr-4 h-125">
-		<h1 class="text-2xl font-bold text-blue-600 mb-6 text-center">Edit Page</h1>
+	<div
+		class="fixed inset-0 bg-black/40 flex justify-center items-center z-50 px-4"
+	>
+		<div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-xl mr-4 h-125">
+			<h1 class="text-2xl font-bold text-blue-600 mb-6 text-center">
+				Edit Page
+			</h1>
 
-		<form
-			@submit.prevent="
-				replaceUserData(
-					newTask,
-					userData.task,
-					newTargetTime,
-					newNotes,
-					newCompletion,
-					currentTime,
-				)
-			"
-		>
-			<div class="space-y-3 text-gray-700">
-				<p>
-					<span class="font-semibold text-black-500">New Name:</span>
-					<textBox
-						v-model="newTask"
-						placeholder="New Task Name"
-						v-if="userData.task.isEditing"
-						class="w-32"
-					></textBox>
-					<textBox
-						v-else
-						v-model="newTask"
-						placeholder="New Task Name"
-						:color="userData.task.progressToDo"
-						:disabled="true"
-						class="w-32"
-					></textBox>
-				</p>
+			<form
+				@submit.prevent="
+					replaceUserData(
+						newTask,
+						userData.task,
+						newTargetTime,
+						newNotes,
+						newCompletion,
+						currentTime,
+					)
+				"
+			>
+				<div class="space-y-3 text-gray-700">
+					<p>
+						<span class="font-semibold text-black-500">New Name:</span>
+						<textBox
+							v-model="newTask"
+							placeholder="New Task Name"
+							v-if="userData.task.isEditing"
+							class="w-32"
+						></textBox>
+						<textBox
+							v-else
+							v-model="newTask"
+							placeholder="New Task Name"
+							:color="userData.task.progressToDo"
+							:disabled="true"
+							class="w-32"
+						></textBox>
+					</p>
 
-				<p>
-					<span class="font-semibold">New Completion:</span>
-					<dropDown
-						v-if="userData.task.isEditing"
-						v-model="newCompletion"
-						id="dropDownStatus"
-						placeholder="Select One"
-						:options="dropDownOptionsStatus"
-					></dropDown>
-					<dropDown
-						v-else
-						v-model="newCompletion"
-						id="dropDownStatus"
-						placeholder="Select One"
-						:options="dropDownOptionsStatus"
-					></dropDown>
-				</p>
+					<p>
+						<span class="font-semibold">New Completion:</span>
+						<dropDown
+							v-if="userData.task.isEditing"
+							v-model="newCompletion"
+							id="dropDownStatus"
+							placeholder="Select One"
+							:options="dropDownOptionsStatus"
+						></dropDown>
+						<dropDown
+							v-else
+							v-model="newCompletion"
+							id="dropDownStatus"
+							placeholder="Select One"
+							:options="dropDownOptionsStatus"
+						></dropDown>
+					</p>
 
-				<p>
-					<span class="font-semibold">New Target Date:</span>
-					<calendar
-						v-model="newTargetTime"
-						v-if="userData.task.isEditing"
-						placeholder="New Target Date"
-					></calendar>
-					<calendar
-						v-model="newTargetTime"
-						v-else
-						placeholder="New Target Date"
-						:color="userData.task.progressToDo"
-						:disabled="true"
-					></calendar>
-				</p>
+					<p>
+						<span class="font-semibold">New Target Date:</span>
+						<calendar
+							v-model="newTargetTime"
+							v-if="userData.task.isEditing"
+							placeholder="New Target Date"
+						></calendar>
+						<calendar
+							v-model="newTargetTime"
+							v-else
+							placeholder="New Target Date"
+							:color="userData.task.progressToDo"
+							:disabled="true"
+						></calendar>
+					</p>
 
-				<p>
-					<span class="font-semibold">New Notes:</span>
-					<Textarea
-						v-if="userData.task.isEditing"
-						placeholder="New Notes"
-						v-model="newNotes"
-						class=""
-					></Textarea>
-					<Textarea
-						v-else
-						placeholder="New Notes"
-						v-model="newNotes"
-						:color="userData.task.progressToDo"
-						:disabled="true"
-					></Textarea>
-				</p>
-			</div>
+					<p>
+						<span class="font-semibold">New Notes:</span>
+						<Textarea
+							v-if="userData.task.isEditing"
+							placeholder="New Notes"
+							v-model="newNotes"
+							class=""
+						></Textarea>
+						<Textarea
+							v-else
+							placeholder="New Notes"
+							v-model="newNotes"
+							:color="userData.task.progressToDo"
+							:disabled="true"
+						></Textarea>
+					</p>
+				</div>
 
-			<div class="mt-6 flex justify-center gap-4">
-				<Button class="text-white" type="submit">Confirm</Button>
-				<Button class="text-white" color="red" @click="emit('close')"
-					>Cancel</Button
-				>
-			</div>
-		</form>
+				<div class="mt-6 flex justify-center gap-4">
+					<Button class="text-white" type="submit">Confirm</Button>
+					<Button class="text-white" color="red" @click="emit('close')"
+						>Cancel</Button
+					>
+				</div>
+			</form>
+		</div>
 	</div>
 </template>

@@ -9,19 +9,22 @@ const props = defineProps({
 });
 
 const total = computed(() => props.todos.length);
-const countCompleted = computed(() =>
-	props.todos.filter((t) => t.completion === 'Complete').length,
+const countCompleted = computed(
+	() => props.todos.filter((t) => t.completion === 'Complete').length,
 );
-const countBlocked = computed(() =>
-	props.todos.filter((t) => t.completion === 'Blocked').length,
+const countBlocked = computed(
+	() => props.todos.filter((t) => t.completion === 'Blocked').length,
 );
-const countIncomplete = computed(() =>
-	props.todos.filter((t) => t.completion === 'Incomplete' || !t.completion)
-		.length,
+const countIncomplete = computed(
+	() =>
+		props.todos.filter((t) => t.completion === 'Incomplete' || !t.completion)
+			.length,
 );
 
 const percentage = computed(() =>
-	total.value === 0 ? 0 : Math.round((countCompleted.value / total.value) * 100),
+	total.value === 0
+		? 0
+		: Math.round((countCompleted.value / total.value) * 100),
 );
 
 const radius = 40;
@@ -39,9 +42,18 @@ const progress = computed(() => (percentage.value / 100) * circumference);
 
 		<div class="flex items-center gap-4">
 			<div class="w-28 h-28 flex items-center justify-center">
-				<svg :width="radius * 2 + stroke" :height="radius * 2 + stroke" viewBox="0 0 100 100">
+				<svg
+					:width="radius * 2 + stroke"
+					:height="radius * 2 + stroke"
+					viewBox="0 0 100 100"
+				>
 					<g transform="translate(50,50)">
-						<circle r="40" :stroke-width="stroke" stroke="#e5e7eb" fill="transparent"></circle>
+						<circle
+							r="40"
+							:stroke-width="stroke"
+							stroke="#e5e7eb"
+							fill="transparent"
+						></circle>
 						<circle
 							r="40"
 							:stroke-width="stroke"
@@ -52,7 +64,15 @@ const progress = computed(() => (percentage.value / 100) * circumference);
 							:stroke-dashoffset="circumference - progress"
 							transform="rotate(-90)"
 						></circle>
-						<text x="0" y="5" text-anchor="middle" fill="#111827" class="font-bold">{{ percentage }}%</text>
+						<text
+							x="0"
+							y="5"
+							text-anchor="middle"
+							fill="#111827"
+							class="font-bold"
+						>
+							{{ percentage }}%
+						</text>
 					</g>
 				</svg>
 			</div>
