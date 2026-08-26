@@ -8,6 +8,7 @@ import Button from './components/common/button.vue';
 import FilterMenu from './components/todos/filterMenu.vue';
 import StatisticToDo from './components/todos/statisticToDo.vue';
 import { supabase } from './logic/supabaseClient.js';
+import accountToDo from './components/todos/accountToDo.vue';
 
 const currentUser = ref(null);
 
@@ -105,6 +106,9 @@ watch(
 	},
 	{ deep: true },
 );
+
+const showSignInPanel = ref(false);
+const showLogInPanel = ref(false);
 </script>
 
 <template>
@@ -127,7 +131,10 @@ watch(
 			<p>Home</p>
 			<p>My Tasks</p>
 			<p>About</p>
-			<Button color="blue" class="text-white">Sign in</Button>
+			<Button color="blue" class="" @click="showSignInPanel = true"
+				>Sign in</Button
+			>
+			<Button color="blue" class="">Log in</Button>
 		</div>
 	</div>
 	<div class="bg-gray-100 min-h-screen">
@@ -151,13 +158,12 @@ watch(
 			></PrintList>
 			<!-- </div> -->
 		</div>
-		<Button @click="testConnection">Test Connection</Button>
-		<Button @click="testInsert">Test Insert</Button>
-		<Button @click="testSignUp">Test Sign Up</Button>
-		<Button @click="testLogin">Test Login</Button>
-		<Button @click="testSecurityBreak">Test Security Break</Button>
-		<p v-if="currentUser">Logged in as: {{ currentUser.email }}</p>
-		<p v-else>Not logged in</p>
+
+		<accountToDo
+			v-if="showSignInPanel"
+			class=""
+			@close="showSignInPanel = null"
+		></accountToDo>
 		<editPanel
 			v-if="panel === 'edit' && currentToDo"
 			class="mt-4"
