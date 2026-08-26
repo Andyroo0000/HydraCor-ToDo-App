@@ -9,11 +9,9 @@ import FilterMenu from './components/todos/filterMenu.vue';
 
 const userData = reactive([]);
 const currentToDo = ref(null);
-
 const panel = ref('');
 
 loadToDos(userData);
-
 watch(userData, saveToDos, { deep: true });
 
 const filteredToDosName = ref({ value: 'all', attribute: 'all' })
@@ -26,14 +24,14 @@ const filteredDropDownOptions = [
 ]
 
 watch(
-	userData,
-	() => {
-		if (currentToDo.value && !userData.includes(currentToDo.value)) {
-			currentToDo.value = null;
-			panel.value = null;
-		}
-	},
-	{ deep: true },
+  userData,
+  () => {
+    if (currentToDo.value && !userData.includes(currentToDo.value)) {
+      currentToDo.value = null;
+      panel.value = null;
+    }
+  },
+  { deep: true },
 );
 </script>
 
