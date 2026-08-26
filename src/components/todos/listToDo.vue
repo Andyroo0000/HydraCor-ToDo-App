@@ -30,7 +30,7 @@ const percentageCompleted = computed(
 );
 
 
-const filteredToDoList = filterToDos(toRef(props, 'filterName'), userData.todos);
+const filteredToDoList = filterToDos(toRef(userData, 'filterName'), userData.todos);
 
 const search = ref('');
 const searchedList = computed(() => {
@@ -52,7 +52,7 @@ watch(
 </script>
 
 <template>
-    <div class="bg-white rounded-2xl shadow-lg mt-8 p-6 ml-5 mr-5">
+    <div class="bg-white rounded-2xl shadow-lg p-6 min-w-72 sm:min-w-[26rem] md:min-w-[32rem] lg:min-w-[36rem]">  
         <div class="flex items-center mb-2">
             <p class="font-bold text-2xl">My Task</p>
             <p class="ml-auto mr-2 relative text-black">You have {{ totalCount }} tasks</p>
@@ -62,7 +62,7 @@ watch(
             <p>No Task Yet! Add One Now!</p>
         </div>
 
-        <ul v-else>
+        <div v-else>
             <div v-if="userData.todos.length > 0" class="mb-4">
                 <TextBox
                     color="blue"
@@ -72,15 +72,6 @@ watch(
                     placeholder="Enter ToDo"
                     class=""
                 ></TextBox>
-
-                <DropDown
-                    class="left-2 mt-2"
-                    v-model="filteredToDosName"
-                    id="dropDownFilter"
-                    label="Filter"
-                    placeholder="Select One"
-                    :options="filteredDropDownOptions"
-                ></DropDown>
 
                 <div class="text-center">
                     <p>Completed</p>
@@ -97,14 +88,14 @@ watch(
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center gap-10 items-start relative flex-wrap">
-                <li
+            <div class="grid grid-cols-2 gap-4 min-h-80">
+                <div
                     v-for="userAction in searchedList"
                     :key="userAction"
                     class="text-black text-center"
                 >
                     <div
-                        class="relative bg-gray-100 rounded-lg shadow-md p-4 w-100 mb-10 border-2 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:z-40"
+                        class="relative bg-gray-100 rounded-lg shadow-md p-4 w-full mb-10 border-2 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:z-40"
                         :class="findBorderColor(userAction)"
                     >
                         <span
@@ -153,9 +144,9 @@ watch(
                         <p class="text-black">Date Ended: {{ userAction.endTime }}</p>
                         <p class="text-black">Notes: {{ userAction.notes }}</p>
                     </div>
-                </li>
+                </div>
             </div>
-        </ul>        
+        </div>        
     </div>
 
 </template>

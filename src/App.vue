@@ -5,7 +5,7 @@ import AddToDo from './components/todos/addToDo.vue';
 import editPanel from './components/todos/panelTodo.vue';
 import { loadToDos, saveToDos } from './logic/saveLoadLogic.js';
 import Button from './components/common/button.vue';
-import filterMenu from './components/todos/filterMenu.vue';
+import FilterMenu from './components/todos/filterMenu.vue';
 
 const userData = reactive([]);
 const currentToDo = ref(null);
@@ -53,13 +53,13 @@ watch(
         <p>Home</p>
         <p>My Tasks</p>
         <p>About</p>
-        <Button color="blue" class="text-white p-1">Sign in</Button>
+        <Button color="blue" class="text-white">Sign in</Button>
     </div>
   </div>
   <div class="bg-gray-100 min-h-screen">
 
 		<div class="flex gap-6 justify-start items-start px-6 max-w-6xl mx-auto">
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4 mt-4">
         <AddToDo :todos="userData"></AddToDo>
         <FilterMenu v-model="filteredToDosName" :options="filteredDropDownOptions"></FilterMenu>
     </div>

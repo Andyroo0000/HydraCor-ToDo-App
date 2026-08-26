@@ -54,7 +54,7 @@ function addToDo() {
 </script>
 
 <template>
-	<div class="bg-white rounded-2xl shadow-lg mt-8 w-85 p-6 ml-10">
+	<div class="bg-white rounded-2xl shadow-lg w-85 p-6 ml-10">
         <form @submit.prevent="addToDo">
             <div class="">
                 <p class="text-lg mb-2">Add Task</p>
