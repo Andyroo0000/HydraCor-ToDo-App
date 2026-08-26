@@ -1,4 +1,4 @@
-<!-- <script setup>
+<script setup>
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -31,7 +31,7 @@ const progress = computed(() => (percentage.value / 100) * circumference);
 </script>
 
 <template>
-	<div class="bg-white rounded-2xl shadow-lg p-6 w-72">
+	<div class="bg-white rounded-2xl shadow-lg p-6 w-85">
 		<div class="flex items-center justify-between mb-4">
 			<p class="font-bold text-lg">Statistics</p>
 			<p class="text-sm text-gray-600">{{ total }} tasks</p>
@@ -73,64 +73,4 @@ const progress = computed(() => (percentage.value / 100) * circumference);
 			</div>
 		</div>
 	</div>
-</template> -->
-
-<script setup>
-
-import { Doughnut } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, DoughnutController, CategoryScale } from 'chart.js'
-
-ChartJS.register(Title, Tooltip, Legend, ArcElement, DoughnutController, CategoryScale)
-
-
-const userData = defineProps({
-    todos: Array
-});
-
-
-const amountCompleted = computed(
-	() => userData.todos.filter((todo) => todo.completion === 'Complete').length,
-);
-
-const amountBlocked = computed(
-	() => userData.todos.filter((todo) => todo.completion === 'Blocked').length,
-);
-const amountIncomplete = computed(
-	() => userData.todos.filter((todo) => todo.completion === 'Incomplete' || !todo.completion).length,
-);
-
-
-const chartData = computed(() => ({
-    labels: ['Completed', 'Blocked', 'Incomplete'],
-    datasets: [
-        {
-            label: 'To-Do Statistics',
-            data: [amountCompleted.value, amountBlocked.value, amountIncomplete.value],
-            backgroundColor: ['#3b82f6', '#ef4444', '#facc15'],
-            borderColor: ['#3b82f6', '#ef4444', '#facc15'],
-            borderWidth: 1,
-        },
-    ],
-}))
-
-const chartOptions = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'bottom',
-        },
-        title: {
-            display: true,
-            text: 'To-Do Statistics',
-        },
-    },
-}
-</script>
-
-<template>
-	<div class="bg-white rounded-2xl shadow-lg p-6 w-72">
-        <Doughnut :data="chartData" :options="chartOptions" />
-    </div>
-
-
 </template>

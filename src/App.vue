@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, watch } from 'vue';
+import { ref, reactive, watch, computed } from 'vue';
 import PrintList from './components/todos/listToDo.vue';
 import AddToDo from './components/todos/addToDo.vue';
 import editPanel from './components/todos/panelTodo.vue';
@@ -58,7 +58,7 @@ watch(
   <div class="bg-gray-100 min-h-screen">
 
 		<div class="flex gap-6 justify-start items-start px-6 max-w-6xl mx-auto">
-    <div class="flex flex-col gap-4 mt-4">
+    <div class="flex flex-col gap-4 mt-4 ml-12">
         <AddToDo :todos="userData"></AddToDo>
         <FilterMenu v-model="filteredToDosName" :options="filteredDropDownOptions"></FilterMenu>
         <StatisticToDo :todos="userData" class="mt-4" />
