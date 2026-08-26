@@ -6,6 +6,7 @@ import editPanel from './components/todos/panelTodo.vue';
 import { loadToDos, saveToDos } from './logic/saveLoadLogic.js';
 import Button from './components/common/button.vue';
 import FilterMenu from './components/todos/filterMenu.vue';
+import StatisticToDo from './components/todos/statisticToDo.vue';
 
 const userData = reactive([]);
 const currentToDo = ref(null);
@@ -60,6 +61,8 @@ watch(
     <div class="flex flex-col gap-4 mt-4">
         <AddToDo :todos="userData"></AddToDo>
         <FilterMenu v-model="filteredToDosName" :options="filteredDropDownOptions"></FilterMenu>
+        <StatisticToDo :todos="userData" class="mt-4" />
+
     </div>
 
     <PrintList
