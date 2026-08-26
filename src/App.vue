@@ -38,7 +38,7 @@ watch(
 
 <template>
   <div class="bg-white w-full h-18 border-black border-b flex items-center justify-between px-6">
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2 ml-20">
         <div class="bg-blue-500 w-10 h-10 rounded flex items-center justify-center">
             <p class="text-white text-center font-bold">AT</p>
         </div>
@@ -48,7 +48,7 @@ watch(
         </div>
     </div>
 
-    <div class="hidden md:flex items-center gap-7">
+    <div class="hidden md:flex items-center gap-7 mr-20">
         <p>Home</p>
         <p>My Tasks</p>
         <p>About</p>
@@ -58,10 +58,10 @@ watch(
   <div class="bg-gray-100 min-h-screen">
 
 		<div class="flex gap-6 justify-start items-start px-6 max-w-6xl mx-auto">
-    <div class="flex flex-col gap-4 mt-4 ml-12">
+    <div class="flex flex-col gap-4 mt-4 ml-8">
         <AddToDo :todos="userData"></AddToDo>
         <FilterMenu v-model="filteredToDosName" :options="filteredDropDownOptions"></FilterMenu>
-        <StatisticToDo :todos="userData" class="mt-4" />
+        <StatisticToDo :todos="userData" class="" />
 
     </div>
 
@@ -76,7 +76,7 @@ watch(
 			<!-- </div> -->
 			<editPanel
 				v-if="panel === 'edit' && currentToDo"
-				class=""
+				class="mt-4"
 				:panel="panel"
 				:todos="userData"
 				:task="currentToDo"

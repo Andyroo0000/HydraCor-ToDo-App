@@ -44,7 +44,7 @@ watch(
 </script>
 
 <template>
-    <div class="bg-white rounded-2xl shadow-lg p-6 min-w-72 sm:min-w-[26rem] md:min-w-[32rem] lg:min-w-[36rem]">  
+    <div class="bg-white rounded-2xl shadow-lg p-6 min-w-72 sm:min-w-[26rem] md:min-w-[32rem] lg:min-w-[45rem]">  
         <div class="flex items-center mb-2">
             <p class="font-bold text-2xl">My Task</p>
             <p class="ml-auto mr-2 relative text-black">You have {{ totalCount }} tasks</p>
@@ -86,7 +86,7 @@ watch(
                             v-if="userData.todos.length > 0"
                             v-model="openMenu"
                             color="menu"
-                            class="hover:bg-gray-500 absolute top-1 right-2 text-white-700 w-10 z-50"
+                            class="hover:bg-gray-200 absolute top-1 right-2 text-white-700 w-10 z-50"
                             @click="openMenu = openMenu === userAction ? null : userAction"
                             >&#8942;</Button
                         >
