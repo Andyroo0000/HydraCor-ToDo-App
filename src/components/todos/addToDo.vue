@@ -55,62 +55,60 @@ function addToDo() {
 
 <template>
 	<div class="bg-white rounded-2xl shadow-lg w-85 p-6">
-        <form @submit.prevent="addToDo">
-            <div class="">
-                <p class="text-lg mb-2 font-bold">Add Task</p>
-                <div class="mb-2">
-                    <textBox
-                        v-model="userTask"
-                        id="task"
-                        required
-                        label="Task:"
-                        placeholder="Enter ToDo"
-                        class="text-black"
-                    ></textBox>
-                </div>
-                <div class="flex-1">
-                    <dropDown
-                    v-model="completionStatus"
-                    id="dropDownStatus"
-                    required
-                    label="Completion:"
-                    placeholder="Select One"
-                    :options="dropDownOptionsStatus"
-                    ></dropDown>
-                </div>
-                <div class="flex-1">
-                    <calendar
-                    v-model="targetDate"
-                    required
-                    id="calendar"
-                    label="Target Date:"
-                    ></calendar>
-                </div>
-                
-                <div>
-                    <Textarea
-                        v-model="userNotes"
-                        id="notes"
-                        label="Notes:"
-                        class="w-full"
-                        placeholder="Enter Notes"
-                        @submit-enter="addToDo"
-                    ></Textarea>
-                </div>
+		<form @submit.prevent="addToDo">
+			<div class="">
+				<p class="text-lg mb-2 font-bold">Add Task</p>
+				<div class="mb-2">
+					<textBox
+						v-model="userTask"
+						id="task"
+						required
+						label="Task:"
+						placeholder="Enter ToDo"
+						class="text-black"
+					></textBox>
+				</div>
+				<div class="flex-1">
+					<dropDown
+						v-model="completionStatus"
+						id="dropDownStatus"
+						required
+						label="Completion:"
+						placeholder="Select One"
+						:options="dropDownOptionsStatus"
+					></dropDown>
+				</div>
+				<div class="flex-1">
+					<calendar
+						v-model="targetDate"
+						required
+						id="calendar"
+						label="Target Date:"
+					></calendar>
+				</div>
 
-                <div class="flex gap-4 mt-5">
-                    <Button class="text-white" type="submit">Add to List</Button>
-                    <Button
-                    class="text-white"
-                    @click="deleteAllTodos(userData.todos)"
-                    color="red"
-                    type="Button"
-                    >Delete All ToDos</Button>  
-                </div>
-                
-            </div>
+				<div>
+					<Textarea
+						v-model="userNotes"
+						id="notes"
+						label="Notes:"
+						class="w-full"
+						placeholder="Enter Notes"
+						@submit-enter="addToDo"
+					></Textarea>
+				</div>
 
-        </form>
-    </div>
-
+				<div class="flex gap-4 mt-5">
+					<Button class="text-white" type="submit">Add to List</Button>
+					<Button
+						class="text-white"
+						@click="deleteAllTodos(userData.todos)"
+						color="red"
+						type="Button"
+						>Delete All ToDos</Button
+					>
+				</div>
+			</div>
+		</form>
+	</div>
 </template>

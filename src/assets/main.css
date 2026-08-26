@@ -1,15 +1,15 @@
 @import 'tailwindcss';
 
 :root {
-  --brand-blue-50: #eff6ff;
-  --brand-blue-100: #dbeafe;
-  --brand-blue-500: #3b82f6;
-  --brand-blue-600: #2563eb;
-  --brand-blue-700: #1d4ed8;
-  --brand-text: #0f172a;
+	--brand-blue-50: #eff6ff;
+	--brand-blue-100: #dbeafe;
+	--brand-blue-500: #3b82f6;
+	--brand-blue-600: #2563eb;
+	--brand-blue-700: #1d4ed8;
+	--brand-text: #0f172a;
 }
 
 /* Small helpers (Tailwind is primary, keep these minimal) */
 body {
-  color: var(--brand-text);
+	color: var(--brand-text);
 }
